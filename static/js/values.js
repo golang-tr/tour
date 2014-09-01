@@ -9,43 +9,43 @@ angular.module('tour.values', []).
 // List of modules with description and lessons in it.
 value('tableOfContents', [{
     'id': 'mechanics',
-    'title': 'Using the tour',
-    'description': '<p>Welcome to a tour of the <a href="http://golang.org">Go programming language</a>. The tour covers the most important features of the language, mainly:</p>',
+    'title': 'Go turu kullanımı',
+    'description': '<p><a href="http://golang.org">Go programlama dili</a> turuna hoşgeldiniz. Turumuz, dilin en önemli özelliklerini kapsayan üç ana bölümden oluşuyor:</p>',
     'lessons': ['welcome']
 }, {
     'id': 'basics',
-    'title': 'Basics',
-    'description': '<p>The starting point, learn all the basics of the language.</p><p>Declaring variables, calling functions, and all the things you need to know before moving to the next lessons.</p>',
+    'title': 'Temel kavramlar',
+    'description': '<p>Başlangıç olarak, dilin temellerini öğrenin.</p><p>Değişken tanımlama, fonksiyon çağırma ve diğer konulara geçmeden önce bilmeniz gereken herşey.</p>',
     'lessons': ['basics', 'flowcontrol', 'moretypes']
 }, {
     'id': 'methods',
-    'title': 'Methods and interfaces',
-    'description': '<p>Learn how to define methods on types, how to declare interfaces, and how to put everything together.</p>',
+    'title': 'Metodlar ve arayüzler',
+    'description': '<p>Türlere metod tanımlamayı, arayüz bildirmeyi ve bunların hepsini nasıl bir arada kullanacağınızı öğrenin.</p>',
     'lessons': ['methods']
 }, {
     'id': 'concurrency',
-    'title': 'Concurrency',
-    'description': '<p>Go provides concurrency features as part of the core language.</p><p>This module goes over goroutines and channels, and how they are used to implement different concurrency patterns.</p>',
+    'title': 'Eşzamanlılık',
+    'description': '<p>Go, eşzamanlılık özelliklerini dilin temel bir parçası olarak sunar.</p><p>Bu bölüm, go rutinlerin ve kanalların eşzamanlılık desenlerini gerçeklemede nasıl kullanıldığı anlatır.</p>',
     'lessons': ['concurrency']
 }]).
 
 // translation
 value('translation', {
-    'off': 'off',
-    'on': 'on',
-    'syntax': 'Syntax-Highlighting',
-    'lineno': 'Line-Numbers',
-    'reset': 'Reset Slide',
-    'format': 'Format Source Code',
-    'kill': 'Kill Program',
-    'run': 'Run',
-    'compile': 'Compile and Run',
-    'more': 'Options',
-    'toc': 'Table of Contents',
-    'prev': 'Previous',
-    'next': 'Next',
-    'waiting': 'Waiting for remote server...',
-    'errcomm': 'Error communicating with remote server.',
+    'off': 'kapalı',
+    'on': 'açık',
+    'syntax': 'Sözdizimi Vurgulaması',
+    'lineno': 'Satır Numaraları',
+    'reset': 'Slaytı Sıfırla',
+    'format': 'Kaynak Kodu Biçimle',
+    'kill': 'Programı Öldür',
+    'run': 'Çalıştır',
+    'compile': 'Derle ve Çalıştır',
+    'more': 'Seçenekler',
+    'toc': 'İçindekiler',
+    'prev': 'Geri',
+    'next': 'İleri',
+    'waiting': 'Sunucu bekleniyor...',
+    'errcomm': 'Sunucu iletişiminde hata.',
 }).
 
 // Config for codemirror plugin

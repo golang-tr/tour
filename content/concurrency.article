@@ -1,103 +1,105 @@
-Concurrency
-Go provides concurrency constructions as part of the core language. This lessons presents them and gives some examples on how to use it.
+Eşzamanlılık
+Go, eşzamanlılık özelliklerini dilin temel bir parçası olarak sunar. Bu bölüm, dilin sunduğu eşzamanlılık özelliklerini ve bunların nasıl kullanılacağını örnekler ile açıklar.
 
-The Go Authors
+Go Yazarları Sunar
 http://golang.org
 
-* Goroutines
+* Go rutinleri
 
-A _goroutine_ is a lightweight thread managed by the Go runtime.
+Bir _goroutine_ Go tarafından çalışma zamanında yönetilen hafif bir iş parçacığıdır ("lightweight thread").
 
 	go f(x, y, z)
 
-starts a new goroutine running
+çağrısı
 
 	f(x, y, z)
 
-The evaluation of `f`, `x`, `y`, and `z` happens in the current goroutine and the execution of `f` happens in the new goroutine.
+fonksiyonunu çalıştıran yeni bir gorutini başlatır.
 
-Goroutines run in the same address space, so access to shared memory must be synchronized. The [[http://golang.org/pkg/sync/][`sync`]] package provides useful primitives, although you won't need them much in Go as there are other primitives. (See the next slide.)
+`f`, `x`, `y` ve `z` 'nin değerlendirilmesi mevcut gorutinde, `f` 'in çalıştırılması ise yeni bir gorutinde gerçekleşir.
+
+Gorutinleri aynı adres uzayında çalışır, bu yüzden paylaşılmış bellek erişimi mutlaka eşzamanlanmalıdır. [[http://golang.org/pkg/sync/][`sync`]] paketi yararlı bazı eşzamanlama ilkelleri sağlar; bununla birlikte Go'da bulunan diğer eşzamanlama ilkelleri sayesinde buna çok ihtiyaç duymayacaksınız. (Bir sonraki slayta bakın.)
 
 .play concurrency/goroutines.go
 
-* Channels
+* Kanallar
 
-Channels are a typed conduit through which you can send and receive values with the channel operator, `<-`.
+Kanallar ("channels"), `<-` kanal operatörü vasıtası ile değer gönderip alabildiğiniz bir veri hattıdır.
 
-	ch <- v    // Send v to channel ch.
-	v := <-ch  // Receive from ch, and
-	           // assign value to v.
+	ch <- v    // v'yi ch kanalına yolla.
+	v := <-ch  // ch'den al ve
+	           // değeri v'ye ata.
 
-(The data flows in the direction of the arrow.)
+(Veri akışı ok yönünde gerçekleşir.)
 
-Like maps and slices, channels must be created before use:
+Tıpkı eşlemler ve dilimler gibi kanallar da kullanılmadan önce oluşturulmalıdır:
 
 	ch := make(chan int)
 
-By default, sends and receives block until the other side is ready. This allows goroutines to synchronize without explicit locks or condition variables.
+Varsayılan olarak, veri gönderimleri ve alımları diğer taraf hazır olana kadar bloklanır. Bu, gorutinlerinin açık kilitler ("explicit locks") veya koşul değişkenleri ("conditional variables") kullanmadan eşzamanlanmasını sağlar.
 
 .play concurrency/channels.go
 
-* Buffered Channels
+* Tamponlanmış Kanallar
 
-Channels can be _buffered_.  Provide the buffer length as the second argument to `make` to initialize a buffered channel:
+Kanallar _tamponlanabilir_.  Tamponlanmış bir kanalı ilklendirmek için `make` fonksiyonunun ikinci parametresine tampon ("buffer") uzunluğunu girin:
 
 	ch := make(chan int, 100)
 
-Sends to a buffered channel block only when the buffer is full. Receives block when the buffer is empty.
+Tamponlanmış bir kanala veri gönderimleri, sadece tampon tamamen dolu olduğunda durur. Tamponlanmış bir kanaldan veri alımları ise tampon tamamen boş olduğunda durur.
 
-Modify the example to overfill the buffer and see what happens.
+Örneğin tamponu gereğinden fazla dolacak şekilde düzenleyip, ne olduğunu gözlemleyin.
 
 .play concurrency/buffered-channels.go
 
-* Range and Close
+* Range ve Close
 
-A sender can `close` a channel to indicate that no more values will be sent. Receivers can test whether a channel has been closed by assigning a second parameter to the receive expression: after
+Gönderici bir kanaldan daha fazla değer gönderilmeyeceğini belirtmek adına `close` yerleşik fonksiyonu ile bu kanalı kapatabilir. Alıcılar, alıcı ifadeye ikinci bir parametre ataması yaparak kanalın kapalı olup olmadığını öğrenebilir:
 
 	v, ok := <-ch
 
-`ok` is `false` if there are no more values to receive and the channel is closed.
+Eğer alınacak başka değer kalmamış ve kanal kapatılmışsa `ok` değişkeni `false` değerini alacaktır.
 
-The loop `for`i`:=`range`c` receives values from the channel repeatedly until it is closed.
+`for`i`:=`range`c` döngüsü kanal kapanana kadar kanaldan tekrar tekrar değer alır.
 
-*Note:* Only the sender should close a channel, never the receiver. Sending on a closed channel will cause a panic.
+*Not:* Yalnızca gönderen kanalı kapatmalıdır, alıcı asla kapatmamalıdır. Kapalı kanala bir şeyler göndermek "paniğe" yol açacaktır.
 
-*Another*note*: Channels aren't like files; you don't usually need to close them. Closing is only necessary when the receiver must be told there are no more values coming, such as to terminate a `range` loop.
+*Başka*bir*not*: Kanallar dosyalar gibi değildir; kapatmanız genellikle gerekmez. Kapatma işlemi yalnızca alıcıya daha başka değer gelmeyeceğini bildirmek maksadıyla yapılır, tıpkı bir `range` döngüsünü sonlandırmak gibi.
 
 .play concurrency/range-and-close.go
 
 * Select
 
-The `select` statement lets a goroutine wait on multiple communication operations.
+`select` deyimi bir gorutinin birden fazla iletişim işleminde beklemesine izin verir.
 
-A `select` blocks until one of its cases can run, then it executes that case.  It chooses one at random if multiple are ready.
+Bir `select`, `case` 'lerinden biri çalışabilir hale gelinceye dek bloke eder. Eğer birden fazla çalıştırılabilir `case` varsa aralarından rastgele birini seçer.
 
 .play concurrency/select.go
 
-* Default Selection
+* Varsayılan Select
 
-The `default` case in a `select` is run if no other case is ready.
+Eğer hazırda başka `case` yoksa `select` 'in içerisindeki `default` çalıştırılır.
 
-Use a `default` case to try a send or receive without blocking:
+Bloklanmadan veri alma ya da gönderme yapmak için `default` kullanın:
 
 	select {
 	case i := <-c:
-		// use i
+		// i'yi kulllan
 	default:
-		// receiving from c would block
+		// c'den almak bloklamalıydı
 	}
 
 .play concurrency/default-selection.go
 
-* Exercise: Equivalent Binary Trees
+* Alıştırma: Eşdeğer İkili Ağaçlar
 
-There can be many different binary trees with the same sequence of values stored at the leaves. For example, here are two binary trees storing the sequence 1, 1, 2, 3, 5, 8, 13.
+Aynı sıralı değerlerin tutulduğu yapraklara sahip çok sayıda farklı ikili ağaçlar olabilir. Örneğin burada 1, 1, 2, 3, 5, 8, 13 sıralı değerlerini tutan iki adet ikili ağaç var:
 
 .image /content/img/tree.png
 
-A function to check whether two binary trees store the same sequence is quite complex in most languages. We'll use Go's concurrency and channels to write a simple solution.
+Çoğu dilde, iki adet ikili ağacın verileri aynı sırada tutup tutmadığını kontrol eden fonksiyonu gerçeklemek bir hayli karışıktır. Basit bir çözüm sunabilmek adına Go'nun eşzamanlılığını ve kanallarını kullanacağız.
 
-This example uses the `tree` package, which defines the type:
+Bu örnek aşağıdaki türü tanımlayan `tree` paketini kullanır:
 
 	type Tree struct {
 		Left  *Tree
@@ -105,72 +107,77 @@ This example uses the `tree` package, which defines the type:
 		Right *Tree
 	}
 
-* Exercise: Equivalent Binary Trees
+* Alıştırma: Eşdeğer İkili Ağaçlar
 
-*1.* Implement the `Walk` function.
+*1.* `Walk` fonksiyonunu gerçekleyin.
 
-*2.* Test the `Walk` function.
+*2.* `Walk` fonksiyonunu test edin.
 
-The function `tree.New(k)` constructs a randomly-structured binary tree holding the values `k`, `2k`, `3k`, ..., `10k`.
+`tree.New(k)` fonksiyonu `k`, `2k`, `3k`, ..., `10k` değerlerini tutarak rastgele yapılandırılmış bir ikili ağacı inşa eder.
 
-Create a new channel `ch` and kick off the walker:
+`ch` adında yeni bir kanal oluşturun ve `Walker` fonksiyonunu bu kanalda başlatın:
 
 	go Walk(tree.New(1), ch)
 
-Then read and print 10 values from the channel. It should be the numbers 1, 2, 3, ..., 10.
+Daha sonra kanaldan 10 değer okuyun ve bunları yazdırın. Değerler 1, 2, 3, ..., 10 olmalı.
 
-*3.* Implement the `Same` function using `Walk` to determine whether `t1` and `t2` store the same values.
+*3.* `t1` ve `t2` 'nin aynı değerleri saklayıp saklamadığını belirleyebilmek adına `Same` fonksiyonunu `Walk` kullanarak gerçekleyin.
 
-*4.* Test the `Same` function.
+*4.* `Same` fonksiyonunu test edin.
 
-`Same(tree.New(1),`tree.New(1))` should return true, and `Same(tree.New(1),`tree.New(2))` should return false.
+`Same(tree.New(1),`tree.New(1))` true ve `Same(tree.New(1),`tree.New(2))` false döndürmelidir.
 
 .play concurrency/exercise-equivalent-binary-trees.go
 
-* Exercise: Web Crawler
+* Alıştırma: Web Crawler
 
-In this exercise you'll use Go's concurrency features to parallelize a web crawler.
+Bu uygulamada Go'nun eşzamanlılık yeteneklerini kullanarak bir "web crawler" uygulamasını paralelleştirmeyi öğreneceksiniz.
 
-Modify the `Crawl` function to fetch URLs in parallel without fetching the same URL twice.
+`Crawl` fonksiyonunu, URL'leri paralel olarak çekecek biçimde (aynı URL iki defa çekilmeyecek) düzenleyin.
 
 .play concurrency/exercise-web-crawler.go
 
-* Where to Go from here...
+* Bundan sonrası...
 
-#appengine: You can get started by
-#appengine: [[http://golang.org/doc/install/][installing Go]] or downloading the
-#appengine: [[http://code.google.com/appengine/downloads.html#Google_App_Engine_SDK_for_Go][Go App Engine SDK]].
+#appengine: İşe
+#appengine: [[http://golang.org/doc/install/][Go yükleyerek]] ya da
+#appengine: [[http://code.google.com/appengine/downloads.html#Google_App_Engine_SDK_for_Go][Go App Engine SDK]] indirerek başlayabilirsiniz.
 
-#appengine: Once you have Go installed, the
-The
-[[http://golang.org/doc/][Go Documentation]] is a great place to
-#appengine: continue.
-start.
-It contains references, tutorials, videos, and more.
+#appengine: Go kurulumunuzu başarılı ile gerçekleştirdikten sonra,
+kaynaklar, bilgilendirici makaleler, videolar ve daha fazlasını bulabileceğiniz
+[[http://golang.org/doc/][Go Dokümantasyonu]]
+#appengine: yola koyulmanız
+başlamanız
+için gerekli temel bilgiyi sunacaktır.
 
-To learn how to organize and work with Go code, watch [[http://www.youtube.com/watch?v=XCsL89YtqCs][this screencast]] or read [[http://golang.org/doc/code.html][How to Write Go Code]].
+Go dilinin kurallarına uygun kod yazmaya başlamak için [[http://www.youtube.com/watch?v=XCsL89YtqCs][şu]] videoyu izleyebilir ya da [[http://golang.org/doc/code.html][How to Write Go Code]] (Go Kodu Yazma) makalesini okuyabilirsiniz.
 
-If you need help with the standard library, see the [[http://golang.org/pkg/][package reference]]. For help with the language itself, you might be surprised to find the [[http://golang.org/ref/spec][Language Spec]] is quite readable.
+Standart kütüphane kullanımına dair yardıma ihtiyacınız olursa, [[http://golang.org/pkg/][ilgili paket referansına]] göz atınız. Dilin genel kullanımı ile ilgili bilgi edinmek isterseniz akıcı ve anlaşılır bir dille yazılmış [[http://golang.org/ref/spec][Language Spec]] ten (Dil Belirtimi) faydalanınız.
 
-To further explore Go's concurrency model, watch
-[[http://www.youtube.com/watch?v=f6kdp27TYZs][Go Concurrency Patterns]]
-([[http://talks.golang.org/2012/concurrency.slide][slides]])
-and
-[[https://www.youtube.com/watch?v=QDDwwePbDtw][Advanced Go Concurrency Patterns]]
-([[http://talks.golang.org/2013/advconc.slide][slides]])
-and read the
-[[http://golang.org/doc/codewalk/sharemem/][Share Memory by Communicating]]
-codewalk.
+Go’nun eşzamanlılık modeli üzerine daha detaylı bilgi edinmek için
+[[http://www.youtube.com/watch?v=f6kdp27TYZs][Go Eşzamanlılık Desenleri]]
+([[http://talks.golang.org/2012/concurrency.slide][sunum]])
+[[https://www.youtube.com/watch?v=QDDwwePbDtw][İleri Go Eşzamanlılık Desenleri]]
+([[http://talks.golang.org/2013/advconc.slide][sunum]])
+videolarını izleyiniz ve
+[[http://golang.org/doc/codewalk/sharemem/][Haberleşerek Hafızayı Paylaşma]]
+dokümanını okuyunuz.
 
-To get started writing web applications, watch
-[[http://vimeo.com/53221558][A simple programming environment]]
-([[http://talks.golang.org/2012/simple.slide][slides]])
-and read the
-[[http://golang.org/doc/articles/wiki/][Writing Web Applications]] tutorial.
+Web uygulamaları yazmaya başlamak için,
+[[http://vimeo.com/53221558][Basit Bir Programlama Ortamı]]
+([[http://talks.golang.org/2012/simple.slide][sunum]])
+videosunu izleyiniz ve
+[[http://golang.org/doc/articles/wiki/][Web Uygulamaları Yazma]] rehberini okuyunuz.
 
-The [[http://golang.org/doc/codewalk/functions/][First Class Functions in Go]] codewalk gives an interesting perspective on Go's function types.
+[[http://golang.org/doc/codewalk/functions/][Go'da Birinci Sınıf Fonksiyonlar]], Go'daki fonksiyon türleri üzerine farklı bir bakış açısı sunacaktır.
 
-The [[http://blog.golang.org/][Go Blog]] has a large archive of informative Go articles.
+[[http://blog.golang.org/][Go Blog]] da çok sayıda bilgilendirici makale bulabilirsiniz.
 
-Visit [[http://golang.org][golang.org]] for more.
+Daha fazlası için [[http://golang.org][golang.org]] adresini ziyaret ediniz.
 
+* Çeviri hakkında
+
+Go Turu çevirisi [[http://golang.org.tr][Go Programlama Dili Türkiye Topluluğu]]
+üyeleri tarafından yapılmıştır.  Çevirmen listesi ve nasıl katkı sağlayacağınız
+hakkında bilgi edinmek için lütfen
+[[https://github.com/golang-tr/go-tour-tr/blob/master/README.md#te%C5%9Fekk%C3%BCrler][tıklayın]].

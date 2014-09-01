@@ -1,124 +1,124 @@
-Packages, variables, and functions.
-Learn the basic components of any Go program.
+Paketler, değişkenler ve fonksiyonlar.
+Bir programının temel bileşenlerini öğrenin.
 
-The Go Authors
+Go Yazarları Sunar
 http://golang.org
 
-* Packages
+* Paketler
 
-Every Go program is made up of packages.
+Her Go programı paketlerden oluşur.
 
-Programs start running in package `main`.
+Programlar `main` paketinde çalışmaya başlar.
 
-This program is using the packages with import paths `"fmt"` and `"math/rand"`.
+Bu örnek program `"fmt"` ve `"math/rand"` paketlerinin yolunu içe aktararak ("import") kullanıyor.
 
-By convention, the package name is the same as the last element of the import path. For instance, the `"math/rand"` package comprises files that begin with the statement `package`rand`.
+Geleneksel olarak, paket isimleri import yolunun son elementi ile isimlendirilir. Örneğin, `"math/rand"` paketi, `package`rand` deyimi ile başlayan dosyaları kapsar.
 
-#appengine: *Note:* the environment in which these programs are executed is
-#appengine: deterministic, so `rand.Intn` will always return the same number.
+#appengine: *Not:* Bu programların yürütüldüğü ortamda rastgelelik olmadığı için,
+#appengine: `rand.Intn` her zaman aynı sayıyı döndürecektir.
 #appengine:
-#appengine: (To see a different number, seed the number generator; see [[http://golang.org/pkg/math/rand/#Seed][`rand.Seed`]].)
+#appengine: (Farklı bir sayı görmek için, sayı üreticisini besleyin; bkz. [[http://golang.org/pkg/math/rand/#Seed][`rand.Seed`]])
 
 .play basics/packages.go
 
-* Imports
+* İçe Aktarımlar
 
-This code groups the imports into a parenthesized, "factored" import statement. 
+Bu kod, içe aktarılan paketleri, parantezlenmiş ve parçalara ayrılmış import deyimi şeklinde gruplar.
 
-You can also write multiple import statements, like:
+Ayrıca çoklu import deyimleri de kullanabilirsiniz:
 
 	import "fmt"
 	import "math"
 
-But it is good style to use the factored import statement.
+Fakat parçalara ayrılmış import deyimi kullanımı daha güzel bir görünüm sunar.
 
 .play basics/imports.go
 
-* Exported names
+* Dışa Aktarılan İsimler
 
-After importing a package, you can refer to the names it exports.
+Bir paketi içe aktardıktan sonra, bu pakette dışa aktarılmış isimleri kullanabilirsiniz.
 
-In Go, a name is exported if it begins with a capital letter.
+Go'da, dışa aktarılmış bir isim büyük harf ile başlar.
 
-`Foo` is an exported name, as is `FOO`. The name `foo` is not exported.
+Tıpkı `FOO` gibi `Foo` da dışa aktarılmış bir isimdir. `foo` ise dışa aktarılmış bir isim değildir.
 
-Run the code. Then rename `math.pi` to `math.Pi` and try it again.
+Yandaki kodu çalıştırın. Sonra `math.pi` yi  `math.Pi` şeklinde değiştirip yeniden çalıştırın.
 
 .play basics/exported-names.go
 
-* Functions
+* Fonksiyonlar
 
-A function can take zero or more arguments.
+Bir fonksiyon bir veya birden fazla sayıda argüman alabileceği gibi hiç argüman almayabilir.
 
-In this example, `add` takes two parameters of type `int`.
+Bu örnekte, `add` fonksiyonu `int` türünde iki parametre alıyor.
 
-Notice that the type comes _after_ the variable name.
+Değişken türünün değişken adından _sonra_ geldiğine dikkat edin.
 
-(For more about why types look the way they do, see the [[http://golang.org/doc/articles/gos_declaration_syntax.html][article on Go's declaration syntax]].)
+(Değişken türlerinin neden bu şekilde tanımlandıkları hakkında daha fazla bilgi için; [[http://golang.org/doc/articles/gos_declaration_syntax.html][Go dilinde bildirim sözdizimi]] makalesine bakın.)
 
 .play basics/functions.go
 
-* Functions continued
+* Fonksiyonlar devam
 
-When two or more consecutive named function parameters share a type, you can omit the type from all but the last.
+İki ya da daha fazla ardışık fonksiyon parametresi aynı türde ise tür bilgisini, en sonda bulunan hariç, diğer parametreler için belirtmeseniz de olur.
 
-In this example, we shortened
+Bu örnekte
 
 	x int, y int
 
-to
+fonksiyon parametrelerini şöyle kısalttık:
 
 	x, y int
 
 .play basics/functions-continued.go
 
-* Multiple results
+* Çoklu sonuçlar
 
-A function can return any number of results.
+Bir fonksiyon herhangi bir sayıda sonuç döndürebilir.
 
-The `swap` function returns two strings.
+Örnekteki `swap` fonksiyonu, dizgi ("string") türünde iki sonuç döndürüyor.
 
 .play basics/multiple-results.go
 
-* Named return values
+* Adlandırılmış sonuçlar
 
-Go's return values may be named and act just like variables.
+Go'nun sonuç değerleri aynı bir değişken gibi adlandırılabilir ve davranır.
 
-These names should be used to document the meaning of the return values.
+Sonuçlar manalarına, işlevlerine göre adlandırılmalıdır.
 
-A `return` statement without arguments returns the current values of the results. This is known as a "naked" return.
+Argümansız bir `return` deyimi sonuçların o anki değerlerini döndürür. Bu "çıplak" return olarak bilinir.
 
-Naked return statements should be used only in short function, as with the example shown here. They can harm readability in longer functions.
+Çıplak return deyimleri, aynı örnekteki gibi, sadece kısa fonksiyonlarda kullanılmalıdır. Uzun fonksiyonlarda kullanılırlarsa kodun okunabilirliğini azaltırlar.
 
 .play basics/named-results.go
 
-* Variables
+* Değişkenler
 
-The `var` statement declares a list of variables; as in function argument lists, the type is last.
+`var` deyimi değişkenler tanımlamaya yarar. Ve tıpkı fonksiyon argümanlarında olduğu gibi tür bilgisi sona yazılır.
 
-A `var` statement can be at package or function level. We see both in this example.
+`var` deyimi paket veya fonksiyon düzeyinde olabilir. Biz bu örnekte ikisini de görüyoruz.
 
 .play basics/variables.go
 
-* Variables with initializers
+* Değişkenleri ilklendirme
 
-A var declaration can include initializers, one per variable.
+Bir `var` deyimi her bir değişken için bir ilklendirme değeri içerebilir.
 
-If an initializer is present, the type can be omitted; the variable will take the type of the initializer.
+Eğer bir ilklendirme mevcut ise tür tanımlaması atlanabilir.  Bu halde değişken, ilklendirme değeri ile aynı türde olacaktır.
 
 .play basics/variables-with-initializers.go
 
-* Short variable declarations
+* Kısaltılmış değişken bildirimleri
 
-Inside a function, the `:=` short assignment statement can be used in place of a `var` declaration with implicit type.
+Bir fonksiyon içerisinde, türü belirtilmiş bir `var` bildirimi yerine `:=` kısa atama deyimi kullanılabilir.
 
-Outside a function, every statement begins with a keyword (`var`, `func`, and so on) and so the `:=` construct is not available.
+Fonksiyon alanının dışında, her yapı bir anahtar kelime (`var`, `func` vs.) ile başlar ve `:=` yapısını kullanmak mümkün değildir.
 
 .play basics/short-variable-declarations.go
 
-* Basic types
+* Basit türler
 
-Go's basic types are
+Go'nun basit türleri şunlardır
 
 	bool
 
@@ -127,97 +127,96 @@ Go's basic types are
 	int  int8  int16  int32  int64
 	uint uint8 uint16 uint32 uint64 uintptr
 
-	byte // alias for uint8
+	byte // diğer adıyla uint8
 
-	rune // alias for int32
-	     // represents a Unicode code point
+	rune // diğer adıyla int32
+	     // Unicode karakter kodlarını ifade eder
 
 	float32 float64
 
 	complex64 complex128
 
-The example shows variables of several types,
-and also that variable declarations may be "factored" into blocks,
-as with import statements.
+Bu örnekte birçok çeşit türden değişken tanımlanmıştır.
+Değişken tanımlamaları, import deyiminde de, olduğu gibi bloklara ayrılmış olarak yapılabilir.
 
 .play basics/basic-types.go
 
-* Zero values
+* Sıfır değerleri
 
-Variables declared without an explicit initial value are given their
-_zero_value_.
+İlklendirilmemiş her değişken başlangıç değeri olarak kendi
+_sıfır_değeri_ni alır.
 
-The zero value is:
-
-- `0` for numeric types,
-- `false` the boolean type, and
-- `""` (the empty string) for strings.
+Sıfır değerleri şunlardır:
+- Sayı türleri için `0`,
+- boolean türü için `false` ve
+- string türü için `""`.
 
 .play basics/zero.go
 
-* Type conversions
+* Tür dönüşümleri
 
-The expression `T(v)` converts the value `v` to the type `T`.
+`T(v)` ifadesi `v` değerini `T` türüne dönüştürür.
 
-Some numeric conversions:
+Bazı sayısal dönüşümler:
 
 	var i int = 42
 	var f float64 = float64(i)
 	var u uint = uint(f)
 
-Or, put more simply:
+Veya basitçesi:
 
 	i := 42
 	f := float64(i)
 	u := uint(f)
 
-Unlike in C, in Go assignment between items of different type requires an
-explicit conversion.
-Try removing the `float64` or `int` conversions in the example and see what happens.
+Go'da türdeş olmayan ögeler arasında gerçekleşen atamalarda, C dilinden farklı
+olarak, açık dönüşüm yapılması gerekir.
+Örnekteki `float64` veya `int` dönüşümlerini kaldırmayı deneyin ve ne olduğunu
+gözlemleyin.
 
 .play basics/type-conversions.go
 
-* Type inference
+* Tür çıkarımı
 
-When declaring a variable without specifying its type (using `var` without a type or the `:=` syntax), the variable's type is _inferred_ from the value on the right hand side.
+Eğer bir değişken türü belirtilmeden tanımlanırsa (yani tür belirtilmeden `var` kullanımı veya `:=` sözdizimi kullanılarak), değişkenin türünü sağ taraftaki değer belirler.
 
-When the right hand side of the declaration is typed, the new variable is of that same type:
+Tanımlamanın sağ tarafı türü belirli olan bir değişken ise, yeni değişkenimiz bu tür ile aynı türe sahip olur:
 
 	var i int
-	j := i // j is an int
+	j := i // j int türünden olur
 
-But when the right hand side contains an untyped numeric constant, the new variable may be an `int`, `float64`, or `complex128` depending on the precision of the constant:
+Fakat sağ taraf türü belirtilmemiş bir sayısal sabit ise, yeni değişken sabitin hassasiyet seviyesine göre `int`, `float64` veya `complex128` türlerinden biri olarak belirlenir:
 
 	i := 42           // int
 	f := 3.142        // float64
 	g := 0.867 + 0.5i // complex128
 
-Try changing the initial value of `v` in the example code and observe how its type is affected.
+Örnek koddaki `v` değerinin başlangıç değerini değiştirin ve girdiğiniz değerlerin türün belirlenmesindeki etkisini gözlemleyin.
 
 .play basics/type-inference.go
 
-* Constants
+* Sabitler
 
-Constants are declared like variables, but with the `const` keyword.
+Sabitler de değişkenler ile aynı şekilde bildirilir ancak sabitler bildirilirken `const` anahtar kelimesi kullanılır.
 
-Constants can be character, string, boolean, or numeric values.
+Sabitler; karakter, dizgi ("string"), mantıksal ("boolean") ya da sayısal değerler alabilir.
 
-Constants cannot be declared using the `:=` syntax.
+Sabitler `:=` operatörü kullanılarak bildirilemezler.
 
 .play basics/constants.go
 
-* Numeric Constants
+* Sayısal Sabitler
 
-Numeric constants are high-precision _values_.
+Sayısal sabitler yüksek hassasiyetli _değerlerdir_.
 
-An untyped constant takes the type needed by its context.
+Tür bilgisi olmayan bir sabit, bağlamının gerektirdiği "tür"den olur.
 
-Try printing `needInt(Big)` too.
+`needInt(Big)` yazdırmayı da deneyin.
 
 .play basics/numeric-constants.go
 
-* Congratulations!
+* Tebrikler!
 
-You finished this lesson!
+Bu dersin sonuna geldiniz!
 
-You can go back to the list of [[/list][modules]] to find what to learn next, or continue with the [[javascript:click('.next-page')][next lesson]].
+Daha neler öğreneceğinizi görmek için [[/list][bölüm listesine]] geri dönün ya da [[javascript:click('.next-page')][bir sonraki derse]] geçin.
