@@ -62,7 +62,7 @@ adımları izleyin.
 
 -   Son güncellemeden bu yana üst depodaki tüm değişiklikleri öğrenin
 
-        $ git log --since=$(cat .last-update) --full-diff upstream/master
+        $ git log --since=$(cat .lastupdate) --full-diff upstream/master
 
     Sadece değiştirdiğimiz dosyalardaki değişiklikleri görmek için şu komut
     kullanılabilir.
@@ -77,7 +77,7 @@ adımları izleyin.
 
 -   Güncelleme tarihini güncelleyin
 
-        $ stat -c %Y .git/FETCH_HEAD >.last-update
+        $ stat -c %Y .git/FETCH_HEAD >.lastupdate
 
 -   Değişiklikleri (anlamlı bir değişiklik güncesiyle) depoya gönderin
 
