@@ -4,7 +4,7 @@ Go, eşzamanlılık özelliklerini dilin temel bir parçası olarak sunar. Bu b�
 Go Yazarları Sunar
 http://golang.org
 
-* Go rutinleri
+* Goroutine
 
 Bir _goroutine_ Go tarafından çalışma zamanında yönetilen hafif bir iş parçacığıdır ("lightweight thread").
 
@@ -14,9 +14,9 @@ Bir _goroutine_ Go tarafından çalışma zamanında yönetilen hafif bir iş pa
 
 	f(x, y, z)
 
-fonksiyonunu çalıştıran yeni bir gorutini başlatır.
+fonksiyonunu çalıştıran yeni bir goroutine başlatır.
 
-`f`, `x`, `y` ve `z` 'nin değerlendirilmesi mevcut gorutinde, `f` 'in çalıştırılması ise yeni bir gorutinde gerçekleşir.
+`f`, `x`, `y` ve `z` 'nin değerlendirilmesi mevcut "goroutine"de, `f` 'in çalıştırılması ise yeni bir "goroutine"de gerçekleşir.
 
 Gorutinleri aynı adres uzayında çalışır, bu yüzden paylaşılmış bellek erişimi mutlaka eşzamanlanmalıdır. [[http://golang.org/pkg/sync/][`sync`]] paketi yararlı bazı eşzamanlama ilkelleri sağlar; bununla birlikte Go'da bulunan diğer eşzamanlama ilkelleri sayesinde buna çok ihtiyaç duymayacaksınız. (Bir sonraki slayta bakın.)
 
@@ -36,7 +36,7 @@ Tıpkı eşlemler ve dilimler gibi kanallar da kullanılmadan önce oluşturulma
 
 	ch := make(chan int)
 
-Varsayılan olarak, veri gönderimleri ve alımları diğer taraf hazır olana kadar bloklanır. Bu, gorutinlerinin açık kilitler ("explicit locks") veya koşul değişkenleri ("conditional variables") kullanmadan eşzamanlanmasını sağlar.
+Varsayılan olarak, veri gönderimleri ve alımları diğer taraf hazır olana kadar bloklanır. Bu, "goroutine"lerin açık kilitler ("explicit locks") veya koşul değişkenleri ("conditional variables") kullanmadan eşzamanlanmasını sağlar.
 
 .play concurrency/channels.go
 
@@ -70,7 +70,7 @@ Eğer alınacak başka değer kalmamış ve kanal kapatılmışsa `ok` değişke
 
 * Select
 
-`select` deyimi bir gorutinin birden fazla iletişim işleminde beklemesine izin verir.
+`select` deyimi bir "goroutine"nin birden fazla iletişim işleminde beklemesine izin verir.
 
 Bir `select`, `case` 'lerinden biri çalışabilir hale gelinceye dek bloke eder. Eğer birden fazla çalıştırılabilir `case` varsa aralarından rastgele birini seçer.
 
