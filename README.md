@@ -67,7 +67,7 @@ adımları izleyin.
     Sadece değiştirdiğimiz dosyalardaki değişiklikleri görmek için şu komut
     kullanılabilir.
 
-        $ git log --since=$(cat .last-update) --full-diff upstream/master -- \
+        $ git log --since=$(cat .lastupdate) --full-diff upstream/master -- \
                 content/*.article \
                 static/js/values.js \
                 template/index.tmpl \
