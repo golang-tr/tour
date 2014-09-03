@@ -191,10 +191,10 @@ ul {
     background: #fff;
 }
 .menu-button[syntax-checkbox]:after {
-    content:' off';
+    content:' kapalı';
 }
 .menu-button[syntax-checkbox].active:after {
-    content:' on';
+    content:' açık';
 }
 #right-side a {
     color: #375eab;
