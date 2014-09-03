@@ -65,25 +65,25 @@ Bu tur şu dillerde de mevcuttur:
 Devam etmek için [[javascript:highlightAndClick(".next-page")]["ileri"]] butonuna tıklayın ya da `PageDown` tuşlayın.
 
 #appengine: * Go Playground
-#appengine:
+#appengine: 
 #appengine: Bu tur [[http://golang.org/][golang.org]] sunucuları üzerinde çalışan
 #appengine: [[http://play.golang.org/][Go Playground]] web servisi üzerine kurulmuştur.
-#appengine:
+#appengine: 
 #appengine: Bu servis, Go programını, bir korunaklı sanal alan ("sandbox") içerisine alıp, derler, bağlar, çalıştırır
 #appengine: ve bu programın çıktısını döndürür.
-#appengine:
+#appengine: 
 #appengine: Playground içinde çalıştırılabilen programlar birtakım kısıtlamalara maruz kalır:
-#appengine:
+#appengine: 
 #appengine: - Playground standart kütüphanenin çoğunu; ağ ve dosya sistemi erişimi eksiklikleri gibi göze çarpan bazı istisnalar dışında, kullanabilir. Bu nedenle, playground programının dış dünyayla tek iletişimi "standard output" ve "standard error"dur.
-#appengine:
+#appengine: 
 #appengine: - Playground'ta zamanın başlangıcı 2009-11-10 23:00:00 UTC tarihine tekabül eder (bu tarihin öneminin ne olduğunu bulmak okuyucu için alıştırma niteliğindedir). Bu, programlara rastgele olmayan çıktılar vererek önbelleğe alınmalarını kolaylaştırır.
-#appengine:
+#appengine: 
 #appengine: - Yürütme zamanı ("execution time"), işlemci, bellek kullanımında da kısıtlamalar mevcuttur ve program tek bir iş parçacığı ("thread") içerisinde çalışacak şekilde kısıtlanmıştır (ama birçok goroutine kullanabilir).
-#appengine:
+#appengine: 
 #appengine: Playground, Go'nun en son kararlı sürümünü kullanır.
-#appengine:
+#appengine: 
 #appengine: Daha fazla bilgi için "[[http://blog.golang.org/playground][Inside the Go Playground]]" kaynağını okuyun.
-#appengine:
+#appengine: 
 #appengine: .play welcome/sandbox.go
 
 * Tebrikler
