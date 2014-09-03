@@ -4,7 +4,7 @@ Bu turu nasıl kullanacağınızı öğrenin: diğer derslere nasıl geçiş yap
 Go Yazarları Sunar
 http://golang.org
 
-* Hello, 世界
+* Merhaba, 世界
 
 [[http://golang.org/][Go programlama dili]] turuna hoşgeldiniz.
 
@@ -75,7 +75,9 @@ Devam etmek için [[javascript:highlightAndClick(".next-page")]["ileri"]] butonu
 #appengine: Playground içinde çalıştırılabilen programlar birtakım kısıtlamalara maruz kalır:
 #appengine:
 #appengine: - Playground standart kütüphanenin çoğunu; ağ ve dosya sistemi erişimi eksiklikleri gibi göze çarpan bazı istisnalar dışında, kullanabilir. Bu nedenle, playground programının dış dünyayla tek iletişimi "standard output" ve "standard error"dur.
+#appengine:
 #appengine: - Playground'ta zamanın başlangıcı 2009-11-10 23:00:00 UTC tarihine tekabül eder (bu tarihin öneminin ne olduğunu bulmak okuyucu için alıştırma niteliğindedir). Bu, programlara rastgele olmayan çıktılar vererek önbelleğe alınmalarını kolaylaştırır.
+#appengine:
 #appengine: - Yürütme zamanı ("execution time"), işlemci, bellek kullanımında da kısıtlamalar mevcuttur ve program tek bir iş parçacığı ("thread") içerisinde çalışacak şekilde kısıtlanmıştır (ama birçok goroutine kullanabilir).
 #appengine:
 #appengine: Playground, Go'nun en son kararlı sürümünü kullanır.

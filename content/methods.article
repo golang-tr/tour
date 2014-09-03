@@ -148,7 +148,7 @@ verinin kaç byte olduğu ile hata değerini döner. Eğer veri akışı sonlanm
 `io.EOF` hatası döner.
 
 Örnek kod bir
-[[//golang.org/pkg/strings/#Reader][`strings.Reader`]].
+[[//golang.org/pkg/strings/#Reader][`strings.Reader`]]
 oluşturuyor ve tek seferde 8 bytelık çıktı işliyor.
 
 .play methods/reader.go

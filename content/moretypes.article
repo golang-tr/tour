@@ -1,5 +1,5 @@
-Daha fazla tür: yapılar ("struct"), dilimler ("slice") ve eşlemler ("map").
-Varolan türleri temel alarak tür tanımlamayı öğrenin: bu bölüm yapılar, diziler ("array"), dilimler ve eşlemleri kapsar.
+Diğer türler: yapı ("struct"), dilim ("slice") ve eşlem ("map")
+Varolan türleri temel alarak tür tanımlamayı öğrenin: bu bölüm yapılar ("struct"), diziler ("array"), dilimler ("slice") ve eşlemleri ("map") kapsar.
 
 Go Yazarları Sunar
 http://golang.org
@@ -9,7 +9,7 @@ http://golang.org
 Go dilinde işaretçiler ("pointer") mevcuttur.
 İşaretçi değişkenin bellekteki adresini tutar.
 
-`*T`, `T` değerini gösteren bir türdür. Sıfır değeri `nil`dir.
+`*T`, `T` değerini gösteren bir türdür. Sıfır değeri olarak `nil` kullanılır.
 
 	var p *int
 

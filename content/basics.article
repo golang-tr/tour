@@ -1,4 +1,4 @@
-Paketler, değişkenler ve fonksiyonlar.
+Paketler, değişkenler ve fonksiyonlar
 Bir programının temel bileşenlerini öğrenin.
 
 Go Yazarları Sunar
@@ -144,12 +144,13 @@ Değişken tanımlamaları, import deyiminde de, olduğu gibi bloklara ayrılmı
 * Sıfır değerleri
 
 İlklendirilmemiş her değişken başlangıç değeri olarak kendi
-_sıfır_değeri_ni alır.
+"sıfır değeri"ni alır.
 
 Sıfır değerleri şunlardır:
+
 - Sayı türleri için `0`,
-- boolean türü için `false` ve
-- string türü için `""`.
+- Mantıksal (boolean) türü için `false`
+- Dizgi (string) türü için `""` (boş dizgi)
 
 .play basics/zero.go
 
