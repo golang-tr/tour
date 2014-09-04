@@ -120,7 +120,7 @@ kendisini çevreleyen fonksiyon dönmeden işleme sokulmaz.
 
 .play flowcontrol/defer.go
 
-* Stacking defers
+* Defer yığını
 
 Ertelenmiş fonksiyon çağrıları yığının tepesine yerleştirilir. Bir fonksiyon döndüğü zaman,
 onun çevrelediği ertelenmiş fonksiyonlar son-giren-ilk-çıkar (LIFO) sırasına göre çağrılır.
