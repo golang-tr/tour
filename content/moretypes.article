@@ -90,7 +90,7 @@ Bir dilim, aynı diziyi işaret eden yeni bir dilim değeri oluşturmak için ye
 
 	s[lo:hi]
 
-ifadesi, `lo` 'dan `hi-1` 'e kadar olan elemanları (`hi-1` dahil) ifade eder. Buna göre;
+ifadesi, `lo` değerinden `hi-1` değerine kadar olan elemanları (`hi-1` dahil) ifade eder. Buna göre;
 
 	s[lo:lo]
 
@@ -108,7 +108,7 @@ Dilimler `make` fonksiyonu ile oluşturulur. `make` fonksiyonu bellekte sıfırl
 
 	a := make([]int, 5)  // len(a)=5
 
-Kapasite belirtmek için, `make` 'e üçüncü bir argüman geçirin:
+Kapasite belirtmek için, `make` fonksiyonuna üçüncü bir argüman geçirin:
 
 	b := make([]int, 0, 5) // len(b)=0, cap(b)=5
 
@@ -119,7 +119,7 @@ Kapasite belirtmek için, `make` 'e üçüncü bir argüman geçirin:
 
 * Boş dilimler
 
-Boş bir dilimin değeri `nil` 'dir.
+Boş bir dilim `nil` değerini alır.
 
 Boş ("nil") bir dilimin uzunluk ve kapasite değeri 0'dır.
 
@@ -166,11 +166,11 @@ Eğer yalnızca indisi kullanmak istiyorsanız ", value" kısmını tamamen çı
 
 * Alıştırma: Dilimler
 
-`Pic` 'i gerçekleyin. Fonksiyonunuz, `dx` 8 bitlik işaretsiz bir tamsayı olmak üzere, her bir elemanı `dx` 'in dilimlerinden oluşan `dy` uzunluğunda bir dilim döndürmelidir. Program çalıştırıldığında, tamsayılar grilik ölçeğine (veya mavilik ölçeğine) karşı düşen değerler olarak yorumlanarak bir resim görüntülenecektir.
+`Pic` fonksiyonunu gerçekleyin. Fonksiyonunuz, `dx` 8 bitlik işaretsiz bir tamsayı olmak üzere, her bir elemanı `dx` elemanlı dilimlerden oluşan `dy` uzunluğunda bir dilim döndürmelidir. Program çalıştırıldığında, tamsayılar grilik ölçeğine (veya mavilik ölçeğine) karşı düşen değerler olarak yorumlanarak bir resim görüntülenecektir.
 
 Resim seçimi size ait. Kullanabileceğiniz bazı ilginç işlemler: `x^y`, `(x+y)/2` ve `x*y`.
 
-(`[][]uint8` içerisindeki her `[]uint8` 'e bellek ayırmak için döngü kullanmanız gerekmektedir.)
+(`[][]uint8` içerisindeki her `[]uint8` dilimine bellek ayırmak için döngü kullanmanız gerekmektedir.)
 
 (Türler arasında dönüşüm yapmak için `uint8(intValue)` ifadesini kullanın.)
 

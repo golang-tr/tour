@@ -28,11 +28,11 @@ Daha henüz iki `Abs` metodu gördük.  Biri `*Vertex` işaretçi türü, diğer
 
 İşaretçi alıcısı ("pointer receiver") kullanmamızın iki nedeni vardır. Birincisi, her metod çağrısında değer kopyalamasından kaçınmak (eğer değer türü büyük bir "struct" ise daha verimli); ikincisi, metodun işaret alıcısının gösterdiği değeri değiştirebilmesi.
 
-`*Vertex` yerine `Vertex` 'i alıcı olarak kullanmak için, `Abs` ve `Scale` metodlarının bildirimlerini değiştirmeyi deneyin.
+`*Vertex` yerine `Vertex` türünde bir alıcı kullanmak için, `Abs` ve `Scale` metodlarının bildirimlerini değiştirmeyi deneyin.
 
-`v` bir `Vertex` ise, `Scale` metodunun hiçbir etkisi yoktur. `Scale`, `v` 'yi değiştirir. `v` işaretçi olmayan bir değer olduğunda, metod onu `Vertex` 'in bir kopyası olarak görür ve asıl değeri değiştiremez.
+`v` bir `Vertex` ise, `Scale` metodunun hiçbir etkisi yoktur. `Scale`, `v` değerini değiştirir. `v` işaretçi olmayan bir değer olduğunda, metod onu `Vertex` türünde bir değer kopyası olarak görür ve asıl değeri değiştiremez.
 
-`Abs` her iki şekilde de çalışır. Yalnızca `v` 'yi okur. Burada asıl değeri okuması (işaretçi vasıtası ile) ve kopyalanmış değeri okuması arasında hiçbir fark yoktur.
+`Abs` her iki şekilde de çalışır. Yalnızca `v` değerini okur. Burada asıl değeri okuması (işaretçi vasıtası ile) ve kopyalanmış değeri okuması arasında hiçbir fark yoktur.
 
 .play methods/methods-with-pointer-receivers.go
 
@@ -58,7 +58,7 @@ Dolaylı arayüzler ("implicit interfaces") gerçekleme paketlerini, arayüzü t
 
 Dolaylı arayüzler, aynı zamanda, arayüzlerin hassas şekilde tanımlanmasını teşvik eder; çünkü bu sayede her gerçeklemeyi bulup yeni bir arayüz ismi ile etiketlemek zorunluluğundan kurtulursunuz.
 
-[[http://golang.org/pkg/io/][Package io]], `Reader` ve `Writer` 'ı otomatik olarak tanımlar; böylece siz tanımlamak zorunda kalmazsınız.
+[[http://golang.org/pkg/io/][Package io]], `Reader` ve `Writer` arayüzlerini otomatik olarak tanımlar; böylece siz tanımlamak zorunda kalmazsınız.
 
 .play methods/interfaces-are-satisfied-implicitly.go
 
@@ -161,13 +161,11 @@ Sınırsız ASCII `'A'` karakter akışı sağlayan bir `Reader` türü gerçekl
 
 * Alıştırma: Rot13 Okuyucu
 
-En yaygın tasarım desenlerinden biri [[http://golang.org/pkg/io/#Reader][io.Reader]]'ın başka bir `io.Reader` 'ı sarmalayıp, akışı bir şekilde düzenlemesidir.
+En yaygın tasarım desenlerinden biri [[http://golang.org/pkg/io/#Reader][io.Reader]]'ın başka bir `io.Reader` sarmalayıp, akışı bir şekilde düzenlemesidir.
 
-Örneğin, [[http://golang.org/pkg/compress/gzip/#NewReader][gzip.NewReader]] fonksiyonu bir `io.Reader` alır ("gzip"lenmiş verinin bir parçası) ve onu aynı zamanda `io.Reader` 'ı gerçekleyen (açılmış verini
-n bir parçası) bir `*gzip.Reader` 'a döndürür.
+Örneğin, [[http://golang.org/pkg/compress/gzip/#NewReader][gzip.NewReader]] fonksiyonu bir `io.Reader` alır ("gzip"lenmiş verinin bir parçası) ve onu aynı zamanda `io.Reader` gerçekleyen (açılmış verinin bir parçası) bir `*gzip.Reader` döndürür.
 
-[[http://en.wikipedia.org/wiki/ROT13][ROT13]] algoritmasını kullanarak alfabedeki tüm harfleri veri akışını değiştirerek şifreleyen, `io.Reader` 'dan okuyup yine `io.Reader` 'a yazan bir `rot13Reader` gerç
-ekleyin.
+[[http://en.wikipedia.org/wiki/ROT13][ROT13]] algoritmasını kullanarak alfabedeki tüm harfleri veri akışını değiştirerek şifreleyen, `io.Reader` akımından okuyup yine `io.Reader` akımına yazan bir `rot13Reader` gerçekleyin.
 
 `rot13Reader` türünü sizin için sunduk. `Read` metodunu gerçekleyerek onu bir `io.Reader` haline getirin.
 
@@ -175,7 +173,7 @@ ekleyin.
 
 * Web sunucuları
 
-[[http://golang.org/pkg/net/http/][http paketi]] HTTP isteklerine, `http.Handler` 'ı gerçekleyen değerleri kullanarak yanıt verir:
+[[http://golang.org/pkg/net/http/][http paketi]] HTTP isteklerine, `http.Handler` arayüzünü gerçekleyen değerleri kullanarak yanıt verir:
 
 	package http
 
@@ -183,7 +181,7 @@ ekleyin.
 		ServeHTTP(w ResponseWriter, r *Request)
 	}
 
-Bu örnekte `Hello` türü `http.Handler` 'ı gerçekliyor.
+Bu örnekte `Hello` türü `http.Handler` arayüzünü gerçekliyor.
 
 Selamlamayı görmek için [[http://localhost:4000/][http://localhost:4000/]] adresini ziyaret edin.
 
@@ -242,13 +240,13 @@ Ayrıca, `color.Color` ve `color.Model` de birer arayüzdür; fakat öntanımlı
 
 Daha önceden yazdığınız resim üretici hatırladınız mı? Hadi bir tane daha yazalım ama bu defa bir veri dilimi döndürmek yerine `image.Image` gerçeklemesi döndürsün.
 
-Kendi `Image` tipinizi tanımlayın, [[http://golang.org/pkg/image/#Image][gerekli metodları]] gerçekleyin ve `pic.ShowImage` 'i çağırın.
+Kendi `Image` tipinizi tanımlayın, [[http://golang.org/pkg/image/#Image][gerekli metodları]] gerçekleyin ve `pic.ShowImage` metodunu çağırın.
 
 `Bounds`, `image.Rect(0,`0,`w,`h)` gibi bir `image.Rectangle` döndürmelidir.
 
 `ColorModel`, `color.RGBAModel` döndürmeli.
 
-`At` bir renk döndürmelidir; son resim üreticisindeki `v` değeri bu defa `color.RGBA{v,`v,`255,`255}` 'e denk gelmelidir.
+`At` bir renk döndürmelidir; son resim üreticisindeki `v` değeri bu defa `color.RGBA{v,`v,`255,`255}` değerine denk gelmelidir.
 
 .play methods/exercise-images.go
 

@@ -20,7 +20,7 @@ Tıpkı C ve Java'daki gibi ön (birinci) ve son (üçüncü) deyimleri boş bı
 
 * For, Go'nun "while"ıdır
 
-Bu aşamada `for` daki noktalı virgülleri de bir köşeye atabilirsiniz: C'deki `while` 'ın karşılığı Go'da `for` 'dur.
+Bu aşamada `for` deyimindeki noktalı virgülleri de bir köşeye atabilirsiniz: C'deki `while` deyiminin Go'da karşılığı `for` deyimidir.
 
 .play flowcontrol/for-is-gos-while.go
 
@@ -42,7 +42,7 @@ Sonsuzluğu küçücük bir alana sığdırdık.
 
 * Kısa bir deyim ile if kullanımı
 
-`for` 'da olduğu gibi, `if` deyimi de koşuldan önce çalıştırılacak kısa bir deyim ile başlayabilir.
+`for` deyiminde olduğu gibi, `if` deyimi de koşuldan önce çalıştırılacak kısa bir deyim ile başlayabilir.
 
 Bu kısa deyimde belirtilen değişkenler, `if` koşulunun kapsamı içinde geçerlidir.
 
@@ -52,7 +52,7 @@ Bu kısa deyimde belirtilen değişkenler, `if` koşulunun kapsamı içinde geç
 
 * If ve else
 
-`if` 'in kapsamında geçerli olan kısa atama ile atanan değişkenler, `else` blokları içinde de geçerlidir.
+`if` deyiminin kapsamında geçerli olan kısa atama ile atanan değişkenler, `else` blokları içinde de geçerlidir.
 
 .play flowcontrol/if-and-else.go
 
@@ -96,7 +96,7 @@ Muhtemelen `switch` (anahtarlama) deyiminin neye benzediğini biliyorsunuzdur.
 	case f():
 	}
 
-eğer `i==0` ise `f` 'yi çağırmaz.)
+eğer `i==0` ise `f` fonksiyonu çağırılmaz.)
 
 #appengine: *Not:* Go Playground'ta zaman her daim 2009-11-10 23:00:00 UTC'den başlar,
 #appengine: bu değerin önemi okuyucu için bir alıştırma niteliğinde olmasıdır.

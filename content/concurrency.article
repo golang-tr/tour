@@ -16,7 +16,7 @@ Bir _goroutine_ Go tarafından çalışma zamanında yönetilen hafif bir iş pa
 
 fonksiyonunu çalıştıran yeni bir goroutine başlatır.
 
-`f`, `x`, `y` ve `z` 'nin değerlendirilmesi mevcut "goroutine"de, `f` 'in çalıştırılması ise yeni bir "goroutine"de gerçekleşir.
+`f`, `x`, `y` ve `z` ifadelerinin değerlendirilmesi mevcut "goroutine"de, `f` fonksiyonunun çalıştırılması ise yeni bir "goroutine"de gerçekleşir.
 
 Gorutinleri aynı adres uzayında çalışır, bu yüzden paylaşılmış bellek erişimi mutlaka eşzamanlanmalıdır. [[http://golang.org/pkg/sync/][`sync`]] paketi yararlı bazı eşzamanlama ilkelleri sağlar; bununla birlikte Go'da bulunan diğer eşzamanlama ilkelleri sayesinde buna çok ihtiyaç duymayacaksınız. (Bir sonraki slayta bakın.)
 
@@ -72,13 +72,13 @@ Eğer alınacak başka değer kalmamış ve kanal kapatılmışsa `ok` değişke
 
 `select` deyimi bir "goroutine"nin birden fazla iletişim işleminde beklemesine izin verir.
 
-Bir `select`, `case` 'lerinden biri çalışabilir hale gelinceye dek bloke eder. Eğer birden fazla çalıştırılabilir `case` varsa aralarından rastgele birini seçer.
+Bir `select`, `case` yollarından biri çalışabilir hale gelinceye dek bloke eder. Eğer birden fazla çalıştırılabilir `case` varsa aralarından rastgele birini seçer.
 
 .play concurrency/select.go
 
 * Varsayılan Select
 
-Eğer hazırda başka `case` yoksa `select` 'in içerisindeki `default` çalıştırılır.
+Eğer hazırda başka `case` yoksa `select` içerisindeki `default` çalıştırılır.
 
 Bloklanmadan veri alma ya da gönderme yapmak için `default` kullanın:
 
@@ -121,7 +121,7 @@ Bu örnek aşağıdaki türü tanımlayan `tree` paketini kullanır:
 
 Daha sonra kanaldan 10 değer okuyun ve bunları yazdırın. Değerler 1, 2, 3, ..., 10 olmalı.
 
-*3.* `t1` ve `t2` 'nin aynı değerleri saklayıp saklamadığını belirleyebilmek adına `Same` fonksiyonunu `Walk` kullanarak gerçekleyin.
+*3.* `t1` ve `t2` ağaçlarının aynı değerleri saklayıp saklamadığını belirleyebilmek adına `Same` fonksiyonunu `Walk` kullanarak gerçekleyin.
 
 *4.* `Same` fonksiyonunu test edin.
 
