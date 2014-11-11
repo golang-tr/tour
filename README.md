@@ -52,13 +52,9 @@ adımları izleyin.
 
 -   İngilizce içeriği birleştirin
 
-        $ git pull -s ours upstream master
+        $ git pull upstream master
 
-    Birleştirme sırasında çakışma oluşmaması için `-s ours` seçeneğiyle Türkçe
-    içeriğin korunmasını sağladığımızı not edin.  Dikkat!  Bu seçenek nedeniyle
-    `content/*.article` dışında değiştirdiğimiz başka bazı dosyalar da (ör.
-    `app.yaml`, `template/index.tmpl`) güncellenmeyecektir.  Bir sonraki adımda
-    lütfen bunu kontrol edin.
+    Birleştirme sırasında çakışma oluşması halinde önce bu çakışmaları çözün.
 
 -   Son güncellemeden bu yana üst depodaki tüm değişiklikleri öğrenin
 
