@@ -1,144 +1,131 @@
-More types: structs, slices, and maps.
-Learn how to define types based on existing ones: this lesson covers structs, arrays, slices, and maps.
+Diğer türler: yapı ("struct"), dilim ("slice") ve eşlem ("map")
+Varolan türleri temel alarak tür tanımlamayı öğrenin: bu bölüm yapılar ("struct"), diziler ("array"), dilimler ("slice") ve eşlemleri ("map") kapsar.
 
-The Go Authors
+Go Yazarları Sunar
 https://golang.org
 
-* Pointers
+* İşaretçiler
 
-Go has pointers.
-A pointer holds the memory address of a variable.
+Go dilinde işaretçiler ("pointer") mevcuttur.
+İşaretçi değişkenin bellekteki adresini tutar.
 
-The type `*T` is a pointer to a `T` value. Its zero value is `nil`.
+`*T`, `T` değerini gösteren bir türdür. Sıfır değeri olarak `nil` kullanılır.
 
 	var p *int
 
-The `&` operator generates a pointer to its operand.
+`&` operatörü başına geldiği terimi gösteren bir gösterici oluşturur.
 
 	i := 42
 	p = &i
 
-The `*` operator denotes the pointer's underlying value.
+`*` operatörü, göstericinin gösterdiği değişkenin değerini gösterir.
 
-	fmt.Println(*p) // read i through the pointer p
-	*p = 21         // set i through the pointer p
+	fmt.Println(*p) // p göstericisi üzerinden i'nin değerini oku
+	*p = 21         // p göstericisi üzerinden i'ye değer ata
 
-This is known as "dereferencing" or "indirecting".
+Buna dolaylı yoldan erişim denir.
 
-Unlike C, Go has no pointer arithmetic.
+C dilinin aksine, Go dilinde gösterici aritmetiği desteklenmez.
 
 .play moretypes/pointers.go
 
-* Structs
+* Yapılar
 
-A `struct` is a collection of fields.
+Struct ("yapı"), alanlardan oluşan bir veri topluluğudur.
 
-(And a `type` declaration does what you'd expect.)
+(`type` bildirimi yapı ("struct") oluşturmaya yarar.)
 
 .play moretypes/structs.go
 
-* Struct Fields
+* Yapı Alanları
 
-Struct fields are accessed using a dot.
+Yapı alanlarına nokta kullanılarak erişilir.
 
 .play moretypes/struct-fields.go
 
-* Pointers to structs
+* Yapı Göstericileri
 
-Struct fields can be accessed through a struct pointer.
+Yapı alanlarına yapı göstericisi ile erişilebilir.
 
-To access the field `X` of a struct when we have the struct pointer `p` we could
-write `(*p).X`.
-However, that notation is cumbersome, so the language permits us instead to
-write just `p.X`, without the explicit dereference.
+Gösterici üzerinden yapılan dolaylama belirgindir.
+
+Elimizdeki `p` yapı işaretçisiyle, bir yapının `X` alanına erişmek için `(*p).X` yazabiliriz.
+Bununla birlikte bu gösterim kullanışsız olduğundan Dil bize bunun yerine doğrudan `p.X` yazma iznini de vermektedir.
 
 .play moretypes/struct-pointers.go
 
-* Struct Literals
+* Yapı Değerleri
 
-A struct literal denotes a newly allocated struct value by listing the values of its fields.
+Bir yapı değeri ("struct literal"), henüz bellek ayrılmış yeni bir yapı değerini, alanlarının değerlerini listeleyerek belirtir.
 
-You can list just a subset of fields by using the `Name:` syntax. (And the order of named fields is irrelevant.)
+`Name:` sözdizimini kullanarak yalnızca alt alanları listeleyebilirsiniz (alan sırası önemli değil)
 
-The special prefix `&` returns a pointer to the struct value.
+Özel `&` ön eki, henüz bellek ayrılmış yeni bir yapı için bir işaretçi oluşturur.
 
 .play moretypes/struct-literals.go
 
+* Diziler
 
-* Arrays
-
-The type `[n]T` is an array of `n` values of type `T`.
-
-The expression
+`[n]T` türü `T` türündeki `n` tane değerden oluşan bir dizidir.
 
 	var a [10]int
 
-declares a variable `a` as an array of ten integers.
+ifadesi 10 tamsayıdan oluşan dizi türünde bir `a` değişkeni bildirir.
 
-An array's length is part of its type, so arrays cannot be resized.
-This seems limiting, but don't worry;
-Go provides a convenient way of working with arrays.
+Dizinin uzunluğu tür bildiriminin bir parçası olduğundan dizi bir kere tanımlandıktan sonra yeniden boyutlandırılamaz.  Bu bir kısıtlama gibi görünüyor, fakat endişe etmeyin;
+Go dizilerle çalışmak için daha uygun bir yol sunuyor.
 
 .play moretypes/array.go
 
+* Dilimler
 
-* Slices
+Bir dizinin uzunluğu sabittir.
+Öte yandan, bir dilim, bir dizinin elemanlarının dinamik boyutlu ve esnek bir görünümü olarak yorumlanabilir.
+Dilimler pratikte dizilerden çok daha yaygındır.
 
-An array has a fixed size.
-A slice, on the other hand, is a dynamically-sized,
-flexible view into the elements of an array.
-In practice, slices are much more common than arrays.
+`[]T` türü `T` türünde elemanları olan bir dilim türüdür.
 
-The type `[]T` is a slice with elements of type `T`.
-
-This expression creates a slice of the first five elements of the array `a`:
+Aşağıdaki ifade `a` dizisinin ilk beş elemanına ilişkin bir dilim oluşturur:
 
 	a[0:5]
 
-
 .play moretypes/slices.go
 
+* Dilimler dizilere olan başvurular gibidir
 
-* Slices are like references to arrays
+Bir dilim herhangi bir veri barındırmaz, sadece arka plandaki bir dizinin bir kısmını niteler.
 
-A slice does not store any data,
-it just describes a section of an underlying array.
+Bir dilimin elemanları değiştirildiğinde arkadaki dizinin karşı düşen elemanlarını da değiştirir.
 
-Changing the elements of a slice modifies the
-corresponding elements of its underlying array.
-
-Other slices that share the same underlying array will see those changes.
+Bu değişiklikler arka planda aynı diziyi kullanan diğer dilimlerde de görünür.
 
 .play moretypes/slices-pointers.go
 
+* Dilim literalleri
 
-* Slice literals
+Bir dilim literali uzunluğun belirtilmediği bir dizi literali gibidir.
 
-A slice literal is like an array literal without the length.
-
-This is an array literal:
+İşte bir dizi literali:
 
 	[3]bool{true, true, false}
 
-And this creates the same array as above,
-then builds a slice that references it:
+ve şimdi yukarıdaki dizinin aynısını yarattıktan sonra bu diziye başvuran bir dilim oluşturalım:
 
 	[]bool{true, true, false}
 
 .play moretypes/slice-literals.go
 
+* Dilim öntanımlıları
 
-* Slice defaults
+Dilimleme yaparken üst ve alt sınırları, öntanımlılar kullanılacak şekilde atlayabilirsiniz.
 
-When slicing, you may omit the high or low bounds to use their defaults instead.
+Öntanımlılar alt sınır için sıfır, üst sınır için ise dilim uzunluğudur.
 
-The default is zero for the low bound and the length of the slice for the high bound.
-
-For the array
+Şu dizi ele alındığında
 
 	var a [10]int
 
-these slice expressions are equivalent:
+aşağıdaki dilim ifadeleri eşdeğerdir:
 
 	a[0:10]
 	a[:10]
@@ -147,48 +134,38 @@ these slice expressions are equivalent:
 
 .play moretypes/slice-bounds.go
 
+* Dilim uzunluk ve kapasitesi
 
-* Slice length and capacity
+Bir dilim hem bir _uzunluk_ hem de bir _kapasite_ niteliğine sahiptir.
 
-A slice has both a _length_ and a _capacity_.
+Bir dilimin uzunluğu dilimin içerdiği elemanların sayısıdır.
 
-The length of a slice is the number of elements it contains.
+Bir dilimin kapasitesi saymaya dilimdeki ilk elemandan başlamak kaydıyla, arka plandaki dizide bulunan elemanların sayısıdır.
 
-The capacity of a slice is the number of elements in the underlying array,
-counting from the first element in the slice.
+Bir `s` diliminin uzunluk ve kapasitesi `len(s)` ve `cap(s)` ifadeleriyle öğrenilebilir.
 
-The length and capacity of a slice `s` can be obtained using the expressions
-`len(s)` and `cap(s)`.
-
-You can extend a slice's length by re-slicing it,
-provided it has sufficient capacity.
-Try changing one of the slice operations in the example program to extend it
-beyond its capacity and see what happens.
+Dilimi genişletmek için tekrar dilimleme yapabilirsiniz, dilimin yeterli kapasiteye sahip olması kaydıyla.
+Örnek programdaki dilim işlemlerinden birini, dilimi kapasitesinin üzerinde genişletecek yönde değiştirin ve ne olduğunu görün.
 
 .play moretypes/slice-len-cap.go
 
+* Boş dilimler
 
-* Nil slices
+Boş bir dilim `nil` değerini alır.
 
-The zero value of a slice is `nil`.
-
-A nil slice has a length and capacity of 0
-and has no underlying array.
+Boş ("nil") bir dilimin uzunluk ve kapasite değeri 0'dır.
 
 .play moretypes/nil-slices.go
 
+* Dilim oluşturmak
 
-* Creating a slice with make
+Dilimler yerleşik `make` fonksiyonu ile oluşturulur; dinamik uzunluklu dizileri böyle oluştururuz.
 
-Slices can be created with the built-in `make` function;
-this is how you create dynamically-sized arrays.
-
-The `make` function allocates a zeroed array
-and returns a slice that refers to that array:
+`make` fonksiyonu bellekte sıfırlanmış bir dizi ayırır ve bu diziyi işaret eden bir dilim döndürür:
 
 	a := make([]int, 5)  // len(a)=5
 
-To specify a capacity, pass a third argument to `make`:
+Kapasite belirtmek için, `make` fonksiyonuna üçüncü bir argüman geçirin:
 
 	b := make([]int, 0, 5) // len(b)=0, cap(b)=5
 
@@ -197,154 +174,143 @@ To specify a capacity, pass a third argument to `make`:
 
 .play moretypes/making-slices.go
 
+* Dilim Dilimleri
 
-* Slices of slices
-
-Slices can contain any type, including other slices.
+Dilimler herhangi bir türde eleman içerebilir, başka dilimler de dahil.
 
 .play moretypes/slices-of-slice.go
 
+* Dilime eleman ekleme
 
-* Appending to a slice
-
-It is common to append new elements to a slice, and so Go provides a built-in
-`append` function. The [[https://golang.org/pkg/builtin/#append][documentation]]
-of the built-in package describes `append`.
+Bir dilime yeni elemanlar eklemek sık yapılan bir işlemdir.  Bu nedenle Go, `append` adında yerleşik bir fonksiyon sunar.
+[[https://golang.org/pkg/builtin/#append][Dokümantasyonda]], yerleşik ögelerin bulunduğu `builtin` paketindeki `append` fonksiyonu şöyle tanımlanmıştır:
 
 	func append(s []T, vs ...T) []T
 
-The first parameter `s` of `append` is a slice of type `T`, and the rest are
-`T` values to append to the slice.
+`append` fonksiyonunun ilk parametresi olan `s` `T` türünden bir dilimdir ve geri kalan diğer tüm `T` dilimleri bu dilime eklenir.
 
-The resulting value of `append` is a slice containing all the elements of the
-original slice plus the provided values.
+`append` fonksiyonu, fonksiyona ilk giren dilim değeri ve diğer eklenen dilim değerlerinin hepsini içeren bir dilim döndürür.
 
-If the backing array of `s` is too small to fit all the given values a bigger
-array will be allocated. The returned slice will point to the newly allocated
-array.
+Eğer `s` dizisinin değeri girilen değerleri saklayamayacak kadar küçük ise daha büyük bir dizi alanı ayrılır ve fonksiyonun döndürdüğü dilim yeni ayrılmış alanı gösterir.
 
-(To learn more about slices, read the [[https://blog.golang.org/go-slices-usage-and-internals][Slices: usage and internals]] article.)
+(Dilimler hakkında daha çok şey öğrenmek için [[https://blog.golang.org/go-slices-usage-and-internals][Dilimler: kullanım ve içyüzü]] makalesini okuyun.)
 
 .play moretypes/append.go
 
-
 * Range
 
-The `range` form of the `for` loop iterates over a slice or map.
+`for` döngüsünün `range` ("aralık") formu ile bir dilim ("slice") veya eşlem ("map") üzerinde dolaşılır.
 
-When ranging over a slice, two values are returned for each iteration.
-The first is the index, and the second is a copy of the element at that index.
+Bir dilim üzerinde dolaşılırken her seferinde iki değer dönülür.
+İlki indis, ikincisi o indisli elemanın bir kopyası.
 
 .play moretypes/range.go
 
-* Range continued
+* Range devam
 
-You can skip the index or value by assigning to `_`.
+Değer dizisinin indislerini veya o indise karşılık gelen değerleri `_` ataması ile atlayabilirsiniz.
 
-If you only want the index, drop the ", value" entirely.
+Yalnızca indisi kullanmak istiyorsanız ", value" kısmını tamamen çıkarınız.
 
 .play moretypes/range-continued.go
 
-* Exercise: Slices
+* Alıştırma: Dilimler
 
-Implement `Pic`. It should return a slice of length `dy`, each element of which is a slice of `dx` 8-bit unsigned integers. When you run the program, it will display your picture, interpreting the integers as grayscale (well, bluescale) values.
+`Pic` fonksiyonunu gerçekleyin. Fonksiyonunuz, `dx` 8 bitlik işaretsiz bir tamsayı olmak üzere, her bir elemanı `dx` elemanlı dilimlerden oluşan `dy` uzunluğunda bir dilim döndürmelidir. Program çalıştırıldığında, tamsayılar grilik ölçeğine (veya mavilik ölçeğine) karşı düşen değerler olarak yorumlanarak bir resim görüntülenecektir.
 
-The choice of image is up to you. Interesting functions include `(x+y)/2`, `x*y`, and `x^y`.
+Resim seçimi size ait. Kullanabileceğiniz bazı ilginç işlemler: `x^y`, `(x+y)/2` ve `x*y`.
 
-(You need to use a loop to allocate each `[]uint8` inside the `[][]uint8`.)
+(`[][]uint8` içerisindeki her `[]uint8` dilimine bellek ayırmak için döngü kullanmanız gerekmektedir.)
 
-(Use `uint8(intValue)` to convert between types.)
+(Türler arasında dönüşüm yapmak için `uint8(intValue)` ifadesini kullanın.)
 
 .play moretypes/exercise-slices.go
 
-* Maps
+* Eşlemler
 
-A map maps keys to values.
+Bir eşlem ("map"), anahtarları ("keys") değerlere ("values") eşler.
 
-The zero value of a map is `nil`.
-A `nil` map has no keys, nor can keys be added.
+Bir eşlemin "sıfır değeri" `nil`'dir. Bir `nil` eşleminde anahtar bulunmadığı gibi anahtar da oluşturulamaz.
 
-The `make` function returns a map of the given type,
-initialized and ready for use.
+`make` fonksiyonu verilen türde, ilklendirilmiş ve kullanıma hazır durumda bir eşlem döner.
 
 .play moretypes/maps.go
 
-* Map literals
+* Eşlem değerleri
 
-Map literals are like struct literals, but the keys are required.
+Eşlem değerleri ("map literals") yapı değerleriyle ("struct literals") benzerlik gösterir; fakat anahtar kullanımı zorunludur.
 
 .play moretypes/map-literals.go
 
-* Map literals continued
+* Eşlem değerleri devam
 
-If the top-level type is just a type name, you can omit it from the elements of the literal.
+Eğer tepe seviyedeki tür yalnızca bir tür adı ise, bunu atlayabilirsiniz.
 
 .play moretypes/map-literals-continued.go
 
-* Mutating Maps
+* Eşlemleri değiştirme
 
-Insert or update an element in map `m`:
+`m` eşlemine bir eleman ekle ya da varolan bir elemanı değiştir:
 
 	m[key] = elem
 
-Retrieve an element:
+Bir elemana eriş:
 
 	elem = m[key]
 
-Delete an element:
+Bir eleman sil:
 
 	delete(m, key)
 
-Test that a key is present with a two-value assignment:
+Anahtarın mevcut olup olmadığını iki-değerli atama ile sına:
 
 	elem, ok = m[key]
 
-If `key` is in `m`, `ok` is `true`. If not, `ok` is `false`.
+Eğer `key`, `m` içindeyse `ok`, `true` değerini alır. Aksi halde `ok`, `false` değerini alır.
 
-If `key` is not in the map, then `elem` is the zero value for the map's element type.
+Benzer şekilde, `key` eşlemde bulunmuyorsa `elem` eşlemin eleman türü için belirlenmiş sıfır değerini alır.
 
-_Note_: if `elem` or `ok` have not yet been declared you could use a short declaration form:
+_Not_: eğer `elem` veya `ok` henüz bildirilmemişse bir kısa bildirim biçimi kullanabilirsiniz:
 
 	elem, ok := m[key]
 
 .play moretypes/mutating-maps.go
 
-* Exercise: Maps
+* Alıştırma: Eşlemler
 
-Implement `WordCount`.  It should return a map of the counts of each “word” in the string `s`. The `wc.Test` function runs a test suite against the provided function and prints success or failure.
+`WordCount` fonksiyonunu gerçekleyin. Fonksiyonunuz `s` dizgisinin içerisindeki her bir “kelime” adedi için bir eşlem döndürmelidir. `wc.Test` fonksiyonu, fonksiyonunuzu test edecek ve fonksiyonunuzun başarılı ya da başarısız olduğunu çıktı olarak verecektir.
 
-You might find [[https://golang.org/pkg/strings/#Fields][strings.Fields]] helpful.
+[[https://golang.org/pkg/strings/#Fields][strings.Fields]] size yardımcı
+olabilir.
 
 .play moretypes/exercise-maps.go
 
-* Function values
+* Fonksiyon değerleri
 
-Functions are values too. They can be passed around just like other values.
+Fonksiyonlar da birer değerdir. Tıpkı diğer değerler gibi bir yerden bir yere aktarılabilirler.
 
-Function values may be used as function arguments and return values.
+Fonksiyon değerleri fonksiyonun argümanları veya dönüş değerleri olarak kullanılabilir.
 
 .play moretypes/function-values.go
 
-* Function closures
+* Fonksiyon kaplamları
 
-Go functions may be closures. A closure is a function value that references variables from outside its body. The function may access and assign to the referenced variables; in this sense the function is "bound" to the variables.
+Go fonksiyonları kaplam ("closure") olabilirler. Kaplam, kendi bloğunun dışındaki değişkenlere erişen bir fonksiyon değeridir. Fonksiyon bu değerlere erişip atama yapabilir; yani bir bakıma bu fonksiyon o değerler ile aynı kapsamdadır.
 
-For example, the `adder` function returns a closure. Each closure is bound to its own `sum` variable.
+Bu örnekte; `adder` fonksiyonu bir kaplam döndürür. Her kaplam kendi `sum` değişkeni ile aynı kapsamdadır.
 
 .play moretypes/function-closures.go
 
-* Exercise: Fibonacci closure
+* Alıştırma: Fibonacci kaplamı
 
-Let's have some fun with functions.
+Hadi fonksiyonlar ile biraz eğlenelim.
 
-Implement a `fibonacci` function that returns a function (a closure) that
-returns successive [[https://en.wikipedia.org/wiki/Fibonacci_number][fibonacci numbers]]
-(0, 1, 1, 2, 3, 5, ...).
+Öyle bir `fibonacci` fonksiyonu tasarlayın ki ardışık [[https://en.wikipedia.org/wiki/Fibonacci_number][fibonacci sayıları]] (0, 1, 1, 2, 3, 5, ...) döndüren bir fonksiyon (kaplam) döndürsün.
 
 .play moretypes/exercise-fibonacci-closure.go
 
-* Congratulations!
+* Tebrikler!
 
-You finished this lesson!
+Bu dersin sonuna geldiniz!
 
-You can go back to the list of [[/list][modules]] to find what to learn next, or continue with the [[javascript:click('.next-page')][next lesson]].
+Daha neler öğreneceğinizi görmek için [[/list][bölüm listesine]] geri dönün ya da [[javascript:click('.next-page')][bir sonraki derse]] geçin.

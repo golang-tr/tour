@@ -1,89 +1,86 @@
-Flow control statements: for, if, else, switch and defer
-Learn how to control the flow of your code with conditionals, loops, switches and defers.
+Akış kontrol deyimleri: for, if, else, switch ve defer
+Kodunuzun akışını koşullar, döngüler, "switch"ler ve "defer"ler ile nasıl kontrol edeceğinizi öğrenin.
 
-The Go Authors
+Go Yazarları Sunar
 https://golang.org
 
 * For
 
-Go has only one looping construct, the `for` loop.
+Go dilinde döngü yapısı olarak sadece `for` mevcuttur.
 
-The basic `for` loop has three components separated by semicolons:
+`for` döngüsü noktalı virgüller ayrılmış üç kısımdan oluşur:
 
-- the init statement: executed before the first iteration
-- the condition expression: evaluated before every iteration
-- the post statement: executed at the end of every iteration
+- ilklendirme deyimi: ilk döngüden önce çalıştırılır
+- koşul ifadesi: her döngüden önce değerlendirilir
+- sonlandırma deyimi: her döngünün sonunda çalıştırılır
 
-The init statement will often be a short variable declaration, and the
-variables declared there are visible only in the scope of the `for`
-statement.
+İlklendirme deyimi sıklıkla kısa bir değişken bildirimidir ve bildirilen değişkenler sadece `for` deyiminin kapsamında geçerlidir.
 
-The loop will stop iterating once the boolean condition evaluates to `false`.
+Döngü koşulu `false` olarak değerlendirildiğinde döngüye girilmeden deyim sonlanır.
 
-_Note_: Unlike other languages like C, Java, or Javascript there are no parentheses
-surrounding the three components of the `for` statement and the braces `{`}` are
-always required.
+_Not_: C, Java ve Javascript gibi dillerden farklı olarak `for` deyiminin üç kısımlı başlangıcı etrafında `(`)` parantezleri bulunmaz, fakat `{`}` parantezleri daima gereklidir.
 
 .play flowcontrol/for.go
 
-* For continued
+* For devam
 
-The init and post statement are optional. 
+İlklendirme (birinci) ve sonlandırma (üçüncü) deyimlerini boş bırakabilirsiniz.
 
 .play flowcontrol/for-continued.go
 
-* For is Go's "while"
+* For, Go'nun "while"ıdır
 
-At that point you can drop the semicolons: C's `while` is spelled `for` in Go.
+Bu aşamada `for` deyimindeki noktalı virgülleri de bir köşeye atabilirsiniz: C'deki `while` deyiminin Go'da karşılığı `for` deyimidir.
 
 .play flowcontrol/for-is-gos-while.go
 
-* Forever
+* Sonsuza dek
 
-If you omit the loop condition it loops forever, so an infinite loop is compactly expressed.
+Eğer döngü koşulunu belirtmezseniz, sonsuz döngü oluşacaktır.
+
+Sonsuzluğu küçücük bir alana sığdırdık.
 
 .play flowcontrol/forever.go
 
 * If
 
-Go's `if` statements are like its `for` loops; the expression need not be
-surrounded by parentheses `(`)` but the braces `{`}` are required.
+Go'da `if` deyimleri görünüm olarak `for` döngüleri gibidir; koşul ifadesinde `(`)` (parantezler) kullanılmaz, ama `{`}` (süslü parantez) kullanılması zorunludur.
 
 .play flowcontrol/if.go
 
-* If with a short statement
+* Kısa bir deyim ile if kullanımı
 
-Like `for`, the `if` statement can start with a short statement to execute before the condition.
+`for` deyiminde olduğu gibi, `if` deyimi de koşuldan önce çalıştırılacak kısa bir deyim ile başlayabilir.
 
-Variables declared by the statement are only in scope until the end of the `if`.
+Bu kısa deyimde belirtilen değişkenler, `if` koşulunun kapsamı içinde geçerlidir.
 
-(Try using `v` in the last `return` statement.)
+(En sondaki return deyiminde `lim` yerine `v` kullanmayı deneyin.)
 
 .play flowcontrol/if-with-a-short-statement.go
 
-* If and else
+* If ve else
 
-Variables declared inside an `if` short statement are also available inside any
-of the `else` blocks.
+`if` deyiminin kapsamında geçerli olan kısa atama ile atanan değişkenler, `else` blokları içinde de geçerlidir.
 
-(Both calls to `pow` are executed and return before the call to `fmt.Println`
-in `main` begins.)
+(Her iki `pow` çağrısı da gerçekleşir ve `main`de `fmt.Println` çağrısı başlamadan tamamlanır.)
 
 .play flowcontrol/if-and-else.go
 
-* Exercise: Loops and Functions
+* Alıştırma: Döngüler ve Fonksiyonlar
 
-As a simple way to play with functions and loops, implement the square root function using Newton's method.
+Karekök alma fonksiyonunu Newton metoduyla gerçekleyin.
 
-In this case, Newton's method is to approximate `Sqrt(x)` by picking a starting point _z_ and then repeating:
+Newton metodunda; bir _z_ başlangıç noktası seçilir ve
 
 .image /content/img/newton.png
 
-To begin with, just repeat that calculation 10 times and see how close you get to the answer for various values (1, 2, 3, ...).
+formülünü tekrarlayarak `Sqrt(x)` ("karekök x") değerine yaklaşılır.
 
-Next, change the loop condition to stop once the value has stopped changing (or only changes by a very small delta). See if that's more or fewer iterations. How close are you to the [[https://golang.org/pkg/math/#Sqrt][math.Sqrt]]?
+Başlangıç olarak bu hesaplamayı 10 defa tekrar edin ve (1, 2, 3, ...) çeşitli değerlerle cevaba ne kadar yaklaştığınızı görün.
 
-Hint: to declare and initialize a floating point value, give it floating point syntax or use a conversion:
+Daha sonra döngü koşulunu, sonuç değeri değişmeyi bıraktığında (ya da çok küçük bir fark ile değiştiğinde) döngünün durmasını sağlayacak şekilde düzenleyin.  Döngünün daha fazla veya daha az çalışıp çalışmadığına bakın.  [[https://golang.org/pkg/math/#Sqrt][Math.sqrt]] fonksiyonunun verdiği sonuca ne kadar yakın bir cevap elde ettiniz?
+
+İpucu: bir kayan noktalı sayı değeri ("floating point value") bildirmek ve ilklendirmek için ya kayan noktalı sayı bildirimi sözdizimini kullanın ya da dönüştürme işlemi uygulayın:
 
 	z := float64(1)
 	z := 1.0
@@ -92,61 +89,56 @@ Hint: to declare and initialize a floating point value, give it floating point s
 
 * Switch
 
-You probably knew what `switch` was going to look like.
+Muhtemelen `switch` (anahtarlama) deyiminin neye benzediğini biliyorsunuzdur.
 
-A case body breaks automatically, unless it ends with a `fallthrough` statement.
+`fallthrough` deyimi ile sonlanana kadar, `case` gövdesi otomatik olarak sonlanacaktır.
 
 .play flowcontrol/switch.go
 
-* Switch evaluation order
+* Switch değerlendirme sırası
 
-Switch cases evaluate cases from top to bottom, stopping when a case succeeds.
+"Switch" deyiminde "case"ler yukarıdan aşağıya değerlendirir ve "case"lerden biri doğrulandığında değerlendirme sonlanır.
 
-(For example,
+(Örneğin,
 
 	switch i {
 	case 0:
 	case f():
 	}
 
-does not call `f` if `i==0`.)
+eğer `i==0` ise `f` fonksiyonu çağırılmaz.)
 
-#appengine: *Note:* Time in the Go playground always appears to start at
-#appengine: 2009-11-10 23:00:00 UTC, a value whose significance is left as an
-#appengine: exercise for the reader.
+#appengine: *Not:* Go Playground'ta zaman her daim 2009-11-10 23:00:00 UTC'den başlar,
+#appengine: bu değerin önemi okuyucu için bir alıştırma niteliğinde olmasıdır.
 
 .play flowcontrol/switch-evaluation-order.go
 
-* Switch with no condition
+* Koşulsuz Switch
 
-Switch without a condition is the same as `switch`true`.
+Koşul belirtilmemiş bir `switch` deyimi, `switch`true` deyimiyle eşdeğerdir.
 
-This construct can be a clean way to write long if-then-else chains.
+Bu yapı uzun "if-then-else" zincirleri yerine kullanılabilecek temiz bir yöntemdir.
 
 .play flowcontrol/switch-with-no-condition.go
 
 * Defer
 
-A defer statement defers the execution of a function until the surrounding
-function returns.
+defer deyimi, kendisini çevreleyen fonksiyon dönene kadar fonksiyonun çalışmasını erteler.
 
-The deferred call's arguments are evaluated immediately, but the function call
-is not executed until the surrounding function returns.
+Ertelenmiş fonksiyon çağrısının argümanları anında değerlendirilir, fakat fonksiyon çağrısı kendisini çevreleyen fonksiyon dönmeden işleme sokulmaz.
 
 .play flowcontrol/defer.go
 
-* Stacking defers
+* Defer yığını
 
-Deferred function calls are pushed onto a stack. When a function returns, its
-deferred calls are executed in last-in-first-out order.
+Ertelenmiş fonksiyon çağrıları yığının tepesine yerleştirilir. Bir fonksiyon döndüğü zaman, onun çevrelediği ertelenmiş fonksiyonlar son-giren-ilk-çıkar (LIFO) sırasına göre çağrılır.
 
-To learn more about defer statements read this
-[[https://blog.golang.org/defer-panic-and-recover][blog post]].
+defer deyimleri hakkında daha fazlasını öğrenmek için şu [[https://blog.golang.org/defer-panic-and-recover][blog yazısını]] okuyun.
 
 .play flowcontrol/defer-multi.go
 
-* Congratulations!
+* Tebrikler!
 
-You finished this lesson!
+Bu dersin sonuna geldiniz!
 
-You can go back to the list of [[/list][modules]] to find what to learn next, or continue with the [[javascript:click('.next-page')][next lesson]].
+Daha neler öğreneceğinizi görmek için [[/list][bölüm listesine]] geri dönün ya da [[javascript:click('.next-page')][bir sonraki derse]] geçin.

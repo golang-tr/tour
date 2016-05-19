@@ -1,113 +1,117 @@
-Welcome!
-Learn how to use this tour: including how to navigate the different lessons and how to run code.
+Hoşgeldiniz!
+Bu turu nasıl kullanacağınızı öğrenin: diğer derslere nasıl geçiş yapacağınızı ve kodları nasıl çalıştıracağınızı.
 
-The Go Authors
+Go Yazarları Sunar
 https://golang.org
 
-* Hello, 世界
+* Merhaba, 世界
 
-Welcome to a tour of the [[https://golang.org/][Go programming language]].
+[[https://golang.org/][Go programlama dili]] turuna hoşgeldiniz.
 
-The tour is divided into a list of modules that you can
-access by clicking on
-[[javascript:highlight(".logo")][A Tour of Go]] on the top left of the page.
+Tur bir dizi bölümlerden oluşmaktadır.
+Sayfanın sol üst köşesindeki [[javascript:highlight(".logo")][Go Turu]] yazısına tıklayarak ilgili bölümlere erişim sağlayabilirsiniz.
 
-You can also view the table of contents at any time by clicking on the [[javascript:highlightAndClick(".nav")][menu]] on the top right of the page.
+Ayrıca sayfanın sağ üst köşesindeki [[javascript:highlightAndClick(".nav")][menü]] yazısına tıklayarak da tüm tur içeriğini görebilirsiniz.
 
-Throughout the tour you will find a series of slides and exercises for you
-to complete.
+Turumuz boyunca, slaytlar ve tamamlamanız için sunulmuş alıştırmalar ile karşılaşacaksınız.
 
-You can navigate through them using
+Bunların arasında gezinmek için şu yöntemleri kullanın:
 
-- [[javascript:highlight(".prev-page")]["previous"]] or `PageUp` to go to the previous page,
+- Bir önceki sayfaya gitmek için [[javascript:highlight(".prev-page")]["önceki"]] veya `PageUp`,
 
-- [[javascript:highlight(".next-page")]["next"]] or `PageDown` to go to the next page.
+- Bir sonraki sayfaya gitmek için [[javascript:highlight(".next-page")]["sonraki"]] veya `PageDown` .
 
-The tour is interactive. Click the
-[[javascript:highlightAndClick("#run")][Run]] button now 
-(or type `shift-enter`) to compile and run the program on
-#appengine: a remote server.
-your computer.
-The result is displayed below the code.
+Turumuz etkileşimlidir.
+Programı
+#appengine: uzak sunucuda
+kendi bilgisayarınızda çalıştırmak için [[javascript:highlightAndClick("#run")][Çalıştır]] butonuna (veya `shift-enter` tuşlarına basın).  Program çıktısını, kodun hemen altında görebilirsiniz.
 
-These example programs demonstrate different aspects of Go. The programs in the tour are meant to be starting points for your own experimentation.
+Bu örnekler Go dilinin farklı yönlerini açıklamaktadır. Bu programlar Go dili deneyimleriniz için birer başlangıç noktası olarak seçilmiştir.
 
-Edit the program and run it again.
+Programı düzenleyin ve tekrar çalıştırın.
 
-Note that when you click on [[javascript:highlightAndClick("#format")][Format]] or `ctrl-enter`
-the text in the editor is formatted using the
-[[https://golang.org/cmd/gofmt/][gofmt]] tool. You can switch syntax highlighting on and off
-by clicking on the [[javascript:highlightAndClick(".syntax-checkbox")][syntax]] button.
+[[javascript:highlightAndClick("#format")][Biçimle]] veya `ctrl-enter` tuşlarına bastığınızda, editördeki yazı [[https://golang.org/cmd/gofmt/][gofmt]] aracını kullanarak biçimlendirilir.
+Sözdizimi renklendirmesini [[javascript:highlightAndClick(".syntax-checkbox")][Renklendirme]] butonuna basarak açıp kapatabilirsiniz.
 
-When you're ready to move on, click the [[javascript:highlightAndClick(".next-page")][right arrow]] below or type the `PageDown` key.
+İlerlemeye hazır olduğunuzda, sayfanın altındaki [[javascript:highlightAndClick(".next-page")][sağ oka]] tıklayın ya da `PageDown` tuşuna basın.
 
 .play welcome/hello.go
 
-* Go local
+* Dilinizde Go
 
-The tour is available in other languages:
+Bu tur şu dillerde de mevcuttur:
 
-- [[https://go-tour-br.appspot.com/][Brazilian Portuguese — Português do Brasil]]
-- [[https://go-tour-ca.appspot.com/][Catalan — Català]]
-- [[https://go-tour-de.appspot.com/][German — Deutsch]]
-- [[https://go-tour-es.appspot.com/][Spanish — Español]]
-- [[https://go-tour-fr.appspot.com/][French — Français]]
-- [[https://go-tour-id2.appspot.com/][Indonesia — Bahasa]]
-- [[https://go-tour-ita.appspot.com/][Italian — Italiano]]
-- [[https://go-tour-he.appspot.com/][Hebrew — עִבְרִית]]
-- [[https://go-tour-jp.appspot.com/][Japanese — 日本語]]
-- [[https://go-tour-kr.appspot.com/][Korean — 한국어]]
-- [[https://go-tour-ro.appspot.com/][Romanian — Română]]
-- [[https://tour.go-zh.org/][Simplified Chinese — 中文（简体）]]
-- [[https://go-tour-zh-tw.appspot.com/][Traditional Chinese — 中文（繁體）]]
-- [[https://go-tour-ua.appspot.com/][Ukrainian — Українська]]
-- [[https://go-tour-uz.appspot.com/][Uzbek — Ўзбекча]]
-- [[http://tur.a.golang.org.tr/][Turkish - Türkçe]]
+- [[https://go-tour-de.appspot.com/][Almanca — Deutsch]]
+- [[https://tour.go-zh.org/][Basitleştirilmiş Çince — 中文（简体）]]
+- [[https://go-tour-br.appspot.com/][Brezilya Portekizcesi — Português do Brasil]]
+- [[https://go-tour-id2.appspot.com/][Endonezce — Bahasa]]
+- [[https://go-tour-fr.appspot.com/][Fransızca — Français]]
+- [[https://go-tour-zh-tw.appspot.com/][Geleneksel Çince — 中文（繁體）]]
+- [[https://go-tour-he.appspot.com/][İbranice — עִבְרִית]]
+- [[https://tour.golang.org/][İngilizce — English]]
+- [[https://go-tour-es.appspot.com/][İspanyolca — Español]]
+- [[https://go-tour-ita.appspot.com/][İtalyanca — Italiano]]
+- [[https://go-tour-jp.appspot.com/][Japonca — 日本語]]
+- [[https://go-tour-ca.appspot.com/][Katalanca — Català]]
+- [[https://go-tour-kr.appspot.com/][Korece — 한국어]]
+- [[https://go-tour-uz.appspot.com/][Özbekçe — Ўзбекча]]
+- [[https://go-tour-ro.appspot.com/][Rumence — Româna]]
+- [[https://tur.golang.org.tr/][Türkçe - Türkçe]]
+- [[https://go-tour-ua.appspot.com/][Ukraynaca — Українська]]
 
-Click the [[javascript:highlightAndClick(".next-page")]["next"]] button or type `PageDown` to continue.
+Devam etmek için [[javascript:highlightAndClick(".next-page")]["ileri"]] butonuna tıklayın ya da `PageDown` tuşlayın.
 
-#appengine: * Go offline
+#appengine: * Çevrimdışı Go
 #appengine: 
-#appengine: This tour is also available as a stand-alone program that you can use
-#appengine: without access to the internet.
+#appengine: Bu tur, İnternet erişimi olmadan kullanabileceğiniz müstakil bir program
+#appengine: halinde de mevcuttur.
 #appengine: 
-#appengine: The stand-alone tour is faster, as it builds and runs the code samples
-#appengine: on your own machine.
+#appengine: Bağımsız tur, kodları kendi makinenizde inşa ettiğinden ve çalıştırdığından
+#appengine: daha hızlıdır.
 #appengine: 
-#appengine: To run the tour locally first
-#appengine: [[http://golang.org/dl/][download and install Go]]
-#appengine: then start the tour from the command line:
+#appengine: Tur'u yerelde çalıştırmak için öncelikle
+#appengine: [[http://golang.org/dl/][Go'yu indirin ve kurun]]
+#appengine: ve sonrasında Tur'u komut satırında başlatın:
 #appengine: 
-#appengine: 	go tool tour
+#appengine:    go tool tour
 #appengine: 
-#appengine: The tour program will open a web browser displaying
-#appengine: your local version of the tour.
+#appengine: Tur programı Tur'un yerel sürümünü görntüleyen bir bir web tarayıcı
+#appengine: açacaktır
 #appengine: 
-#appengine: Or, of course, you can continue to take the tour through this web site.
+#appengine: Veya, dilerseniz Tur'a bu web sitesi üzerinden devam edebilirsiniz.
 
-#appengine: * The Go Playground
+#appengine: * Go Playground
 #appengine: 
-#appengine: This tour is built atop the [[https://play.golang.org/][Go Playground]], a
-#appengine: web service that runs on [[https://golang.org/][golang.org]]'s servers.
+#appengine: Bu tur [[https://golang.org/][golang.org]] sunucuları üzerinde çalışan
+#appengine: [[https://play.golang.org/][Go Playground]] web servisi üzerine kurulmuştur.
 #appengine: 
-#appengine: The service receives a Go program, compiles, links, and runs the program inside
-#appengine: a sandbox, then returns the output.
+#appengine: Bu servis, Go programını, bir korunaklı sanal alan ("sandbox") içerisine alıp,
+#appengine: derler, bağlar, çalıştırır ve bu programın çıktısını döndürür.
 #appengine: 
-#appengine: There are limitations to the programs that can be run in the playground: 
+#appengine: Playground içinde çalıştırılabilen programlar birtakım kısıtlamalara maruz kalır:
 #appengine: 
-#appengine: - In the playground the time begins at 2009-11-10 23:00:00 UTC (determining the significance of this date is an exercise for the reader). This makes it easier to cache programs by giving them deterministic output.
+#appengine: - Playground standart kütüphanenin çoğunu; ağ ve dosya sistemi erişimi eksiklikleri
+#appengine: gibi göze çarpan bazı istisnalar dışında, kullanabilir. Bu nedenle,
+#appengine: playground programının dış dünyayla tek iletişimi "standard output" ve
+#appengine: "standard error"dur.
 #appengine: 
-#appengine: - There are also limits on execution time and on CPU and memory usage, and the program cannot access external network hosts. 
+#appengine: - Playground'ta zamanın başlangıcı 2009-11-10 23:00:00 UTC tarihine
+#appengine: karşılık gelir (bu tarihin öneminin ne olduğunu bulmak okuyucu için
+#appengine: alıştırma niteliğindedir). Bu, programlara rastgele olmayan çıktılar
+#appengine: vererek önbelleğe alınmalarını kolaylaştırır.
 #appengine: 
-#appengine: The playground uses the latest stable release of Go.
+#appengine: - Yürütme zamanı ("execution time"), işlemci, bellek kullanımında da kısıtlamalar
+#appengine: mevcuttur ve program dış ağ sunucularına erişemez.
 #appengine: 
-#appengine: Read "[[https://blog.golang.org/playground][Inside the Go Playground]]" to learn more.
+#appengine: Playground, Go'nun en son kararlı sürümünü kullanır.
+#appengine: 
+#appengine: Daha fazla bilgi için "[[https://blog.golang.org/playground][Inside the Go Playground]]"
+#appengine: kaynağını okuyun.
 #appengine: 
 #appengine: .play welcome/sandbox.go
 
-* Congratulations
+* Tebrikler
 
-You've finished the first module of the tour!
+Turun ilk bölümünü bitirdiniz!
 
-Now click on [[javascript:highlightAndClick(".logo")][A Tour of Go]] to find out what else
-you can learn about Go, or go directly to the [[javascript:click('.next-page')][next lesson]].
+Şimdi Go hakkında daha neler öğrenebileceğinizi görmek için [[javascript:highlightAndClick(".logo")][Go Turu]] logosuna veya bir sonraki derse doğrudan gitmek için [[javascript:click('.next-page')][bir sonraki ders]] yazısına tıklayın.
