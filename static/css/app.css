@@ -200,10 +200,10 @@ ul {
     background: #fff;
 }
 .menu-button[syntax-checkbox]:after {
-    content: ' off';
+    content: ' kapalı';
 }
 .menu-button[syntax-checkbox].active:after {
-    content: ' on';
+    content: ' açık';
 }
 #file-menu .menu-button {
     float: right;
@@ -211,7 +211,7 @@ ul {
 a#run, a#kill {
     background-color: #375eab;
     color: #fff;
-    width: 40px;
+    width: 50px;
     text-align: center;
 }
 #run:hover:not(:active), #kill:hover:not(:active) {
