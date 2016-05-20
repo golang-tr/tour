@@ -208,11 +208,11 @@ Bu sözdizimiyle, eşlemleri okurken kullanılan sözdizimi arasındaki benzerli
 
 .play methods/type-assertions.go
 
-* Tür makasları
+* Tür anahtarı
 
-Bir _tür_makası_ seri halde çok sayıda tür onayının yapılmasına olanak sağlayan bir yapıdır.
+Bir _tür_anahtarı_ seri halde çok sayıda tür onayının yapılmasına olanak sağlayan bir yapıdır.
 
-Tür makası olağan bir "switch" deyimi gibi çalışır, fakat tür makasında her bir durum ilgili (değerleri değil) türü belirtir ve bu türler arayüz değeriyle ilişkili türle karşılaştırılır.
+Tür anahtarı olağan bir "switch" deyimi gibi çalışır, fakat her bir durum ilgili (değerleri değil) türü belirtir ve bu türler arayüz değeriyle ilişkili türle karşılaştırılır.
 
 	switch v := i.(type) {
 	case T:
@@ -223,7 +223,7 @@ Tür makası olağan bir "switch" deyimi gibi çalışır, fakat tür makasında
 		// uygun tür yok; v burada i ile aynı türde
 	}
 
-Bir tür makasında bildirim tür onayındaki `i.(T)` sözdizimiyle aynıdır, sadece `T` özel türünün yerini `type` anahtar kelimesi alır.
+Bir tür anahtarında bildirim tür onayındaki `i.(T)` sözdizimiyle aynıdır, sadece `T` özel türünün yerini `type` anahtar kelimesi alır.
 
 Bu "switch" deyimi `i` arayüz değerinin `T` veya `S` türünde değerler barındırıp barındırmadığını sınamaktadır.
 Her bir `T` ve `S` durumunda `v` değişkeni sırasıyla `i` ile taşınan `T` veya `S` türünde bir değer alır.
