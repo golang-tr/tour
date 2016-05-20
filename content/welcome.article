@@ -63,29 +63,29 @@ Devam etmek için [[javascript:highlightAndClick(".next-page")]["ileri"]] butonu
 
 #appengine: * Çevrimdışı Go
 #appengine: 
-#appengine: Bu tur, İnternet erişimi olmadan kullanabileceğiniz müstakil bir program
+#appengine: Bu tur, İnternet erişimi olmadan kullanabileceğiniz bağımsız bir program
 #appengine: halinde de mevcuttur.
 #appengine: 
-#appengine: Bağımsız tur, kodları kendi makinenizde inşa ettiğinden ve çalıştırdığından
+#appengine: Bağımsız tur, kodları kendi makinenizde inşa edip çalıştırdığından
 #appengine: daha hızlıdır.
 #appengine: 
 #appengine: Tur'u yerelde çalıştırmak için öncelikle
 #appengine: [[http://golang.org/dl/][Go'yu indirin ve kurun]]
-#appengine: ve sonrasında Tur'u komut satırında başlatın:
+#appengine: ve Tur'u komut satırında başlatın:
 #appengine: 
 #appengine:    go tool tour
 #appengine: 
-#appengine: Tur programı Tur'un yerel sürümünü görntüleyen bir bir web tarayıcı
+#appengine: Tur programı Tur'un yerel sürümünü görüntüleyen bir web tarayıcı
 #appengine: açacaktır
 #appengine: 
-#appengine: Veya, dilerseniz Tur'a bu web sitesi üzerinden devam edebilirsiniz.
+#appengine: Veya dilerseniz Tur'a bu web sitesi üzerinden devam edebilirsiniz.
 
 #appengine: * Go Playground
 #appengine: 
 #appengine: Bu tur [[https://golang.org/][golang.org]] sunucuları üzerinde çalışan
 #appengine: [[https://play.golang.org/][Go Playground]] web servisi üzerine kurulmuştur.
 #appengine: 
-#appengine: Bu servis, Go programını, bir korunaklı sanal alan ("sandbox") içerisine alıp,
+#appengine: Servis, Go programını, bir korunaklı sanal alan ("sandbox") içerisine alıp,
 #appengine: derler, bağlar, çalıştırır ve bu programın çıktısını döndürür.
 #appengine: 
 #appengine: Playground içinde çalıştırılabilen programlar birtakım kısıtlamalara maruz kalır:
